@@ -1914,7 +1914,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #60e958;
+  background: #06557a;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2757,4 +2757,16 @@ embed {
 }
 .brand {
   background: #527f9c;
+}
+.headband {
+  background: #527f9c;
+}
+.sidebar-toggle {
+  background: #527f9c;
+}
+.sidebar {
+  background: #22445a;
+}
+a {
+  color: #406c88;
 }
