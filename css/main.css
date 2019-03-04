@@ -1914,7 +1914,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #53ffff;
+  background: #60e958;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2447,13 +2447,6 @@ img:hover {
 .page-pv .busuanzi-value {
   margin: 0 5px;
 }
-.site-uv {
-  margin-right: 10px;
-}
-.site-uv::after {
-  content: "|";
-  padding-left: 10px;
-}
 .page-archive .archive-page-counter {
   position: relative;
   top: 3px;
@@ -2758,4 +2751,10 @@ embed {
   padding: 25px;
   -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
+.site-uv::after {
+  display: none;
+}
+.brand {
+  background: #527f9c;
 }
