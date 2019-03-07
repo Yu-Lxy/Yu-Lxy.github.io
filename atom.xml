@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>LXYu.♡</title>
+  
+  <subtitle>˙ ᵕ ˙</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-03-05T09:22:08.022Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>鲤小鱼</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo</title>
+    <link href="http://yoursite.com/2019/03/01/haha/"/>
+    <id>http://yoursite.com/2019/03/01/haha/</id>
+    <published>2019-03-01T09:32:15.000Z</published>
+    <updated>2019-03-05T09:22:08.022Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是摘要</p><a id="more"></a><p>这是全文<br>1<br>2<br>3<br>4<br>5</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是摘要&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://yoursite.com/categories/hexo/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>
