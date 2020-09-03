@@ -2749,11 +2749,13 @@ embed {
   margin-top: 60px;
   margin-bottom: 60px;
   padding: 25px;
-  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
-  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+  background: #efe3e0;
+  border-radius: 15px;
+  /* -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5); */
 }
 body {
-  background: url("/images/back1.jpg");
+  background-color: #f9ece9;
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
