@@ -1,13 +1,15 @@
 ---
 title: vue+koa+mysql实现一个简单的todolist
 date: 2020-09-03 10:41:27
-tags: koa
-catgories: koa vue
+tags: 
+- vue
+- koa
+catgories: koa
 ---
 
 ## Start
 
-构建一个数据通过 `koa` 的api获取，页面通过 `vue` 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面，其中用到了前端 `Vue框架` 、`koa` 提供接口、验证 `token`、`sequelize` 操作 `mysql` 等，这里记录一些关键点。
+构建一个数据通过 `koa` 的api获取，页面通过 `vue` 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面的增删改查，其中用到了前端 `Vue框架` 、`koa` 提供接口、验证 `token`、`sequelize` 操作 `mysql` 等，这里记录一些关键点。
 
 <!-- more -->
 ## 初始化
@@ -61,7 +63,7 @@ list表：
 
 在`server/config`下新建db.js, 用于初始化Sequelize和数据库的连接（具体代码见项目）
 
-### JSON-WEB-TOKEN
+## JSON-WEB-TOKEN
 运用了JSON-WEB-TOKEN的登录系统应该是这样的：
 > 1. 用户在登录页输入账号密码，将账号密码（加密后）发送请求给后端
 > 2. 后端验证一下用户的账号和密码的信息，如果符合就发一个token返回给客户端，如果不符合就不发送token，返回验证错误信息。
