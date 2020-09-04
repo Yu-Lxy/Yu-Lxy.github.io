@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="js,">
+  <meta name="keywords" content="mongoDB,">
 
 
 
@@ -81,18 +81,20 @@
 
 
 
-<meta name="description" content="写代码时经常会用到 try catch，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？">
-<meta name="keywords" content="js">
+<meta name="description" content="简介一个 vue+express+mongodb 的小demo，实现了列表的增删查，以及简单的分页功能。Github项目地址">
+<meta name="keywords" content="mongoDB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="try catch能捕获到哪些JS异常">
-<meta property="og:url" content="http://yoursite.com/2020/08/04/tryCatch/index.html">
+<meta property="og:title" content="第一次使用mongoDB的记录">
+<meta property="og:url" content="http://yoursite.com/2020/09/04/mongo/index.html">
 <meta property="og:site_name" content="LXYu.♡">
-<meta property="og:description" content="写代码时经常会用到 try catch，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？">
+<meta property="og:description" content="简介一个 vue+express+mongodb 的小demo，实现了列表的增删查，以及简单的分页功能。Github项目地址">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-04T02:00:54.226Z">
+<meta property="og:image" content="https://i.loli.net/2020/08/27/ALNjeIKPOY9QTHF.png">
+<meta property="og:updated_time" content="2020-09-04T10:00:05.625Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="try catch能捕获到哪些JS异常">
-<meta name="twitter:description" content="写代码时经常会用到 try catch，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？">
+<meta name="twitter:title" content="第一次使用mongoDB的记录">
+<meta name="twitter:description" content="简介一个 vue+express+mongodb 的小demo，实现了列表的增删查，以及简单的分页功能。Github项目地址">
+<meta name="twitter:image" content="https://i.loli.net/2020/08/27/ALNjeIKPOY9QTHF.png">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/08/04/tryCatch/">
+  <link rel="canonical" href="http://yoursite.com/2020/09/04/mongo/">
 
 
 
 
 
-  <title>try catch能捕获到哪些JS异常 | LXYu.♡</title>
+  <title>第一次使用mongoDB的记录 | LXYu.♡</title>
   
 
 
@@ -257,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/04/tryCatch/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/04/mongo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="鲤小鱼">
@@ -274,7 +276,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">try catch能捕获到哪些JS异常</h1>
+          <h1 class="post-title" itemprop="name headline">第一次使用mongoDB的记录</h1>
         
 
         <div class="post-meta">
@@ -286,8 +288,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-04T09:50:45+08:00">
-                2020-08-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-04T15:30:15+08:00">
+                2020-09-04
               </time>
             
 
@@ -309,8 +311,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
+                  <a href="/categories/mongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">mongoDB</span>
                   </a>
                 </span>
 
@@ -346,36 +348,39 @@
       
 
       
-        <blockquote>
-<p>写代码时经常会用到 <code>try catch</code>，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？</p>
-</blockquote>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>一个 <code>vue+express+mongodb</code> 的小demo，实现了列表的增删查，以及简单的分页功能。<br><a href="https://github.com/Yu-Lxy/Daily_practice/tree/master/mongo" target="_blank" rel="noopener">Github项目地址</a></p>
 <a id="more"></a>
-<blockquote>
-<p><strong>简单解释就是：在报错的时候，线程执行已经进入 <code>try catch</code> 代码块，并且处在 <code>try catch</code> 里，才能被捕捉到。</strong>（之前，之后都无法捕捉异常）</p>
+<h2 id="mongo命令行操作"><a href="#mongo命令行操作" class="headerlink" title="mongo命令行操作"></a>mongo命令行操作</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 进入mongo命令行</span></span><br><span class="line"><span class="selector-tag">mongo</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询所有数据库</span></span><br><span class="line"><span class="selector-tag">show</span> <span class="selector-tag">dbs</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 切换/创建数据库,当创建一个集合(table)的时候会自动创建当前数据库</span></span><br><span class="line"><span class="selector-tag">use</span> <span class="selector-tag">test</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询</span></span><br><span class="line"><span class="selector-tag">db</span>.表名<span class="selector-class">.find</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 条件查询</span></span><br><span class="line"><span class="selector-tag">db</span>.表名<span class="selector-class">.find</span>(&#123;<span class="attribute">price</span>: <span class="number">5</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入(insertOne/insertMany/save)</span></span><br><span class="line"><span class="selector-tag">db</span>.表名<span class="selector-class">.insertOne</span>(&#123;<span class="attribute">name</span>: <span class="string">'苹果'</span>, <span class="attribute">price</span>: <span class="number">5</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新</span></span><br><span class="line"><span class="selector-tag">db</span>.表名<span class="selector-class">.update</span>(&#123; <span class="attribute">name</span>: <span class="string">'苹果'</span> &#125;, &#123; $<span class="attribute">set</span>: &#123; <span class="attribute">price</span>: <span class="number">6</span> &#125; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除(deleteOne/deleteMany/remove)</span></span><br><span class="line"><span class="selector-tag">db</span>.表名<span class="selector-class">.updateOne</span>(&#123; <span class="attribute">name</span>: <span class="string">'苹果'</span> &#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="mongoDB"><a href="#mongoDB" class="headerlink" title="mongoDB"></a>mongoDB</h2><blockquote>
+<p>mongoDB的基本操作</p>
 </blockquote>
-<ul>
-<li><h6 id="下面三个小栗子，解释一下-try-catch-的前中后"><a href="#下面三个小栗子，解释一下-try-catch-的前中后" class="headerlink" title="下面三个小栗子，解释一下 try catch 的前中后"></a>下面三个小栗子，解释一下 <code>try catch</code> 的前中后</h6></li>
+<ol>
+<li><p>连接mongoDB</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="keyword">const</span> MongoClient = <span class="built_in">require</span>(<span class="string">'mongodb'</span>).MongoClient</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接URL</span></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">url</span> = <span class="string">'mongodb://localhost:27017'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据库名</span></span><br><span class="line"><span class="keyword">const</span> dbName = <span class="string">'test'</span></span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 0.创建客户端</span></span><br><span class="line">  <span class="keyword">const</span> client = <span class="keyword">new</span> MongoClient(<span class="built_in">url</span>, &#123; <span class="attribute">useNewUrlParser</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">  <span class="title">try</span> &#123;</span><br><span class="line">    <span class="comment">// 1.连接数据库(异步) </span></span><br><span class="line">    <span class="keyword">await</span> client.connect() </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'连接成功'</span>)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(error)</span><br><span class="line">  &#125;</span><br><span class="line">  client.close()</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取数据库</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">db</span> = client.<span class="keyword">db</span>(dbName)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取表</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> col = <span class="keyword">db</span>.collection(colName)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>基本操作了解后运行一下<a href="https://github.com/Yu-Lxy/Daily_practice/tree/master/mongo" target="_blank" rel="noopener">项目</a>里的代码~ 👇</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>首先安装以下<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">i</span> express path <span class="keyword">events</span> mongodb nodemon</span><br></pre></td></tr></table></figure></p>
+<p>conf.js里设置自己的mongodb配置</p>
+<p>数据库没数据的话先执行以下添加数据：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> models</span><br><span class="line">nodemon testData.js</span><br></pre></td></tr></table></figure></p>
+<p>添加好之后ctrl+c, 再执行以下<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">cd</span></span> ..</span><br><span class="line">nodemon index.js</span><br></pre></td></tr></table></figure></p>
+<p>打开localhost:3000能看到如下样式</p>
+<p><img src="https://i.loli.net/2020/08/27/ALNjeIKPOY9QTHF.png" alt="image.png"></p>
+<h2 id="EventEmitter"><a href="#EventEmitter" class="headerlink" title="EventEmitter"></a>EventEmitter</h2><p><a href="https://github.com/Yu-Lxy/Daily_practice/tree/master/mongo" target="_blank" rel="noopener">项目</a>中有一个testData.js，执行后可以插入测试数据。其中有一个 <code>mongodb.once()</code> 方法，实际上在db.js里的 <code>MongDB类</code> 中是执行了 <code>EventEmitter的once</code> 方法。events模块只提供了一个对象： <code>events.EventEmitter</code>， 其核心就是事件触发与事件监听器功能的封装，可以通过require(‘events’)来访问该模块。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例子</span></span><br><span class="line"><span class="keyword">const</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter </span><br><span class="line"><span class="keyword">const</span> event = <span class="keyword">new</span> EventEmitter() </span><br><span class="line">event.on(<span class="string">'some_event'</span>, <span class="function"><span class="params">num</span> =&gt;</span>  &#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'some_event 事件触发:'</span> + num) </span><br><span class="line">&#125;) </span><br><span class="line"><span class="keyword">let</span> num = <span class="number">0</span></span><br><span class="line">setInterval(<span class="function"><span class="params">()</span> =&gt;</span>  &#123; </span><br><span class="line">  event.emit(<span class="string">'some_event'</span> , num ++ ) </span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure></p>
+<p><code>event.once()</code> 是只执行一次的监听，所以执行 <code>nodemon testData.js</code> 后，只触发一次连库的操作并执行回调。</p>
+<h2 id="注意的点"><a href="#注意的点" class="headerlink" title="注意的点"></a>注意的点</h2><ul>
+<li>后端get请求的参数从<code>query</code>里拿, post请求的参数从<code>body</code>里拿。</li>
+<li><code>const page = + req.query.page</code> +号为了转Number类型。</li>
+<li><code>.skip(n).limit(m)</code> 意为跳过n个取m个。</li>
+<li>mongoDB插入数据时自动生成的 <code>_id</code> 是 <code>ObjectId</code> 对象类型，所以当参数作为查询条件时需要引入 <code>mongodb的ObjectID</code>，传参时调用。</li>
 </ul>
-<p>🌰 例子1：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    a(</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>, e)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">Uncaught <span class="built_in">SyntaxError</span>: Unexpected token &#125;</span><br></pre></td></tr></table></figure></p>
-<p><em>例子1</em> 语法异常（SyntaxError），因为语法异常是在语法阶段就报错了，所以线程还没进入 <code>try catch</code> 代码块，就捕获不到异常。</p>
-<p>🌰 例子2：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function d () &#123;a.b&#125;</span><br><span class="line">try &#123;</span><br><span class="line">   d()</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">   console.log('error', e)</span><br><span class="line">&#125;</span><br><span class="line">// output</span><br><span class="line"><span class="keyword">error </span>ReferenceError: a is not defined</span><br></pre></td></tr></table></figure></p>
-<p><em>例子2</em> 报错的时机，是代码执行进入了 <code>try catch</code> ，执行 d 方法的时候，线程执行处在 <code>try</code> 里面，所以能捕捉到。</p>
-<p>🌰 例子3：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">   function d () &#123;a.b&#125;</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">   console.log('error', e)</span><br><span class="line">&#125;</span><br><span class="line">d()</span><br><span class="line">// output</span><br><span class="line"><span class="keyword">error </span>ReferenceError: a is not defined</span><br></pre></td></tr></table></figure></p>
-<p><em>例子3</em> 方法定义在 <code>try catch</code> 代码块里，但是执行方法在 <code>try catch</code> 外，执行 d 方法的时候报错，此时 try catch 已经执行完成，所以无法捕捉异常。</p>
-<p>三个例子之后应该能理解怎样的JS异常可以被捕获了，但是在我们用 <code>promise</code> 的时候发现相对于外部的 <code>try catch</code> ，Promise 没有异常！</p>
-<h3 id="promise-amp-try-catch"><a href="#promise-amp-try-catch" class="headerlink" title="promise &amp; try catch"></a>promise &amp; try catch</h3><p>🌰 例子4：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    a.b</span><br><span class="line">  &#125;).then(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>(v)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'error'</span>, e)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">Uncaught (<span class="keyword">in</span> promise) <span class="built_in">ReferenceError</span>: a is not defined</span><br></pre></td></tr></table></figure></p>
-<p><em>例子4</em> 线程在执行a.b的时候，适时向属于同步执行，<code>try catch</code> 并未执行完成，为什么捕获不到异常呢？</p>
-<p>事实上，<strong>Promise 的异常都是由 reject 和 Promise.prototype.catch 来捕获</strong>，不管是同步还是异步。</p>
-<p>核心原因是因为 <code>Promise</code> 在执行回调中都用 <code>try catch</code> 包裹起来了，其中所有的异常都被内部捕获到了，并未往上抛异常，所以异常都不会被外层的 <code>try catch</code> 捕捉。</p>
-<p>🌰 例子5：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      reject(<span class="string">'报错了'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">await</span> a()</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>, e)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">foo()</span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">error 报错了</span><br></pre></td></tr></table></figure></p>
-<p>为什么 <em>例子5</em> 的异常能被 <code>catch</code> 捕获到呢，因为报错的时候，线程执行已经进入了 <code>try catch</code> 代码块，并且异常由 reject 抛出，自然可以捕获到。</p>
-<p> ###总结：</p>
-<blockquote>
-<p><strong>1. 在报错的时候，线程执行已经进入 <code>try catch</code> 代码块，并且处在 <code>try catch</code> 里，才能被捕捉到。</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>2. 不要用 <code>try catch</code> 包裹 <code>Promise</code>，我们只需要给 <code>Promise</code> 增加 Promise#catch 就 OK 了</strong></p>
-</blockquote>
+<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>前端小白第一次使用mongoDB的记录📝，简单小例子容易入门和理解，轻喷~ 😆</p>
 
       
     </div>
@@ -393,7 +398,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js/" rel="tag"><i class="fa fa-tag"></i> js</a>
+            <a href="/tags/mongoDB/" rel="tag"><i class="fa fa-tag"></i> mongoDB</a>
           
         </div>
       
@@ -406,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/28/eventLoop/" rel="next" title="EventLoop 的简单理解">
-                <i class="fa fa-chevron-left"></i> EventLoop 的简单理解
+              <a href="/2020/08/25/koa/" rel="next" title="vue+koa+mysql实现一个简单的todolist">
+                <i class="fa fa-chevron-left"></i> vue+koa+mysql实现一个简单的todolist
               </a>
             
           </div>
@@ -415,10 +420,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/08/25/koa/" rel="prev" title="vue+koa+mysql实现一个简单的todolist">
-                vue+koa+mysql实现一个简单的todolist <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -581,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#下面三个小栗子，解释一下-try-catch-的前中后"><span class="nav-number">1.</span> <span class="nav-text">下面三个小栗子，解释一下 try catch 的前中后</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#promise-amp-try-catch"><span class="nav-number"></span> <span class="nav-text">promise &amp; try catch</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongo命令行操作"><span class="nav-number">2.</span> <span class="nav-text">mongo命令行操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongoDB"><span class="nav-number">3.</span> <span class="nav-text">mongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行"><span class="nav-number">4.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EventEmitter"><span class="nav-number">5.</span> <span class="nav-text">EventEmitter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意的点"><span class="nav-number">6.</span> <span class="nav-text">注意的点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#End"><span class="nav-number">7.</span> <span class="nav-text">End</span></a></li></ol></div>
             
 
           </div>
