@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="koa,">
+  <meta name="keywords" content="vue,koa,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Start构建一个数据通过 koa 的api获取，页面通过 vue 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面，其中用到了前端 Vue框架 、koa 提供接口、验证 token、sequelize 操作 mysql 等，这里记录一些关键点。">
-<meta name="keywords" content="koa">
+<meta name="description" content="Start构建一个数据通过 koa 的api获取，页面通过 vue 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面的增删改查，其中用到了前端 Vue框架 、koa 提供接口、验证 token、sequelize 操作 mysql 等，这里记录一些关键点。">
+<meta name="keywords" content="vue,koa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue+koa+mysql实现一个简单的todolist">
 <meta property="og:url" content="http://yoursite.com/2020/09/03/koa/index.html">
 <meta property="og:site_name" content="LXYu.♡">
-<meta property="og:description" content="Start构建一个数据通过 koa 的api获取，页面通过 vue 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面，其中用到了前端 Vue框架 、koa 提供接口、验证 token、sequelize 操作 mysql 等，这里记录一些关键点。">
+<meta property="og:description" content="Start构建一个数据通过 koa 的api获取，页面通过 vue 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面的增删改查，其中用到了前端 Vue框架 、koa 提供接口、验证 token、sequelize 操作 mysql 等，这里记录一些关键点。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-04T03:05:35.477Z">
+<meta property="og:updated_time" content="2020-09-04T04:04:15.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue+koa+mysql实现一个简单的todolist">
-<meta name="twitter:description" content="Start构建一个数据通过 koa 的api获取，页面通过 vue 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面，其中用到了前端 Vue框架 、koa 提供接口、验证 token、sequelize 操作 mysql 等，这里记录一些关键点。">
+<meta name="twitter:description" content="Start构建一个数据通过 koa 的api获取，页面通过 vue 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面的增删改查，其中用到了前端 Vue框架 、koa 提供接口、验证 token、sequelize 操作 mysql 等，这里记录一些关键点。">
 
 
 
@@ -324,7 +324,7 @@
       
 
       
-        <h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><p>构建一个数据通过 <code>koa</code> 的api获取，页面通过 <code>vue</code> 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面，其中用到了前端 <code>Vue框架</code> 、<code>koa</code> 提供接口、验证 <code>token</code>、<code>sequelize</code> 操作 <code>mysql</code> 等，这里记录一些关键点。</p>
+        <h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><p>构建一个数据通过 <code>koa</code> 的api获取，页面通过 <code>vue</code> 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面的增删改查，其中用到了前端 <code>Vue框架</code> 、<code>koa</code> 提供接口、验证 <code>token</code>、<code>sequelize</code> 操作 <code>mysql</code> 等，这里记录一些关键点。</p>
 <a id="more"></a>
 <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>这里用到的是vue-cli2的webpack，项目创建好之后执行<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn </span><br><span class="line">yarn <span class="keyword">add </span>koa koa-router koa-logger koa-<span class="keyword">json </span>koa-<span class="keyword">bodyparser </span>nodemon vue-router element-ui axios koa-<span class="keyword">jwt </span><span class="keyword">bcrypt </span>kao-static</span><br></pre></td></tr></table></figure></p>
 <blockquote>
@@ -398,7 +398,7 @@
 <h2 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h2><p><code>sequelize</code> 理解为用简单的方式操作数据库的ORM框架。</p>
 <p><code>server/schema</code> 下新建两个文件，user.js和list.js，是数据库的两张表结构，可使用sequelize-auto直接导出表结构。</p>
 <p>在<code>server/config</code>下新建db.js, 用于初始化Sequelize和数据库的连接（具体代码见项目）</p>
-<h3 id="JSON-WEB-TOKEN"><a href="#JSON-WEB-TOKEN" class="headerlink" title="JSON-WEB-TOKEN"></a>JSON-WEB-TOKEN</h3><p>运用了JSON-WEB-TOKEN的登录系统应该是这样的：</p>
+<h2 id="JSON-WEB-TOKEN"><a href="#JSON-WEB-TOKEN" class="headerlink" title="JSON-WEB-TOKEN"></a>JSON-WEB-TOKEN</h2><p>运用了JSON-WEB-TOKEN的登录系统应该是这样的：</p>
 <blockquote>
 <ol>
 <li>用户在登录页输入账号密码，将账号密码（加密后）发送请求给后端</li>
@@ -432,7 +432,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/koa/" rel="tag"># koa</a>
+            <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
+          
+            <a href="/tags/koa/" rel="tag"><i class="fa fa-tag"></i> koa</a>
           
         </div>
       
@@ -616,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Start"><span class="nav-number">1.</span> <span class="nav-text">Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">3.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequelize"><span class="nav-number">4.</span> <span class="nav-text">Sequelize</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-WEB-TOKEN"><span class="nav-number">4.1.</span> <span class="nav-text">JSON-WEB-TOKEN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码加密"><span class="nav-number">5.</span> <span class="nav-text">密码加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Token的发送与验证"><span class="nav-number">6.</span> <span class="nav-text">Token的发送与验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Koa-serve静态资源"><span class="nav-number">7.</span> <span class="nav-text">Koa serve静态资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#End"><span class="nav-number">8.</span> <span class="nav-text">End</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Start"><span class="nav-number">1.</span> <span class="nav-text">Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">3.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequelize"><span class="nav-number">4.</span> <span class="nav-text">Sequelize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-WEB-TOKEN"><span class="nav-number">5.</span> <span class="nav-text">JSON-WEB-TOKEN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码加密"><span class="nav-number">6.</span> <span class="nav-text">密码加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Token的发送与验证"><span class="nav-number">7.</span> <span class="nav-text">Token的发送与验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Koa-serve静态资源"><span class="nav-number">8.</span> <span class="nav-text">Koa serve静态资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#End"><span class="nav-number">9.</span> <span class="nav-text">End</span></a></li></ol></div>
             
 
           </div>
