@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="js,">
 
 
 
@@ -81,13 +81,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="LXYu.♡">
-<meta property="og:url" content="http://yoursite.com/categories/vue/index.html">
+<meta name="description" content="EventLoop是什么 一个循环 每次循环叫tick 每次循环的代码叫task   V8引擎单线程无法同时干两件事 文件读取、网络IO缓慢且具有不确定性 要通过异步回调方式处理又称为异步IO 先同步再异步 异步放入队列等同步完成后再执行 每次循环叫一个tick(process.nextTick())">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EventLoop 的简单理解">
+<meta property="og:url" content="http://yoursite.com/2020/07/28/eventLoop/index.html">
 <meta property="og:site_name" content="LXYu.♡">
+<meta property="og:description" content="EventLoop是什么 一个循环 每次循环叫tick 每次循环的代码叫task   V8引擎单线程无法同时干两件事 文件读取、网络IO缓慢且具有不确定性 要通过异步回调方式处理又称为异步IO 先同步再异步 异步放入队列等同步完成后再执行 每次循环叫一个tick(process.nextTick())">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-04T02:15:23.937Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LXYu.♡">
+<meta name="twitter:title" content="EventLoop 的简单理解">
+<meta name="twitter:description" content="EventLoop是什么 一个循环 每次循环叫tick 每次循环的代码叫task   V8引擎单线程无法同时干两件事 文件读取、网络IO缓慢且具有不确定性 要通过异步回调方式处理又称为异步IO 先同步再异步 异步放入队列等同步完成后再执行 每次循环叫一个tick(process.nextTick())">
 
 
 
@@ -117,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/vue/">
+  <link rel="canonical" href="http://yoursite.com/2020/07/28/eventLoop/">
 
 
 
 
 
-  <title>分类: vue | LXYu.♡</title>
+  <title>EventLoop 的简单理解 | LXYu.♡</title>
   
 
 
@@ -142,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -238,53 +243,205 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>vue<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/28/eventLoop/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="鲤小鱼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/31298201?s=400&u=bf760848190371b7140df49fd93789b8d1072652&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LXYu.♡">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/09/03/xiumi/" itemprop="url">
-              
-                <span itemprop="name">vue+vue-ueditor-wrap+秀米</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">EventLoop 的简单理解</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-03T17:44:15+08:00" content="2019-09-03">
-          09-03
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-28T10:13:09+08:00">
+                2020-07-28
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="EventLoop是什么"><a href="#EventLoop是什么" class="headerlink" title="EventLoop是什么"></a>EventLoop是什么</h3><blockquote>
+<p>一个循环 每次循环叫tick 每次循环的代码叫task</p>
+</blockquote>
+<ul>
+<li>V8引擎单线程无法同时干两件事</li>
+<li>文件读取、网络IO缓慢且具有不确定性</li>
+<li>要通过异步回调方式处理又称为异步IO</li>
+<li>先同步再异步 异步放入队列等同步完成后再执行 每次循环叫一个tick(process.nextTick())</li>
+</ul>
+<a id="more"></a>
+<h3 id="异步任务的区分"><a href="#异步任务的区分" class="headerlink" title="异步任务的区分"></a>异步任务的区分</h3><p>microtasks(微任务)：</p>
+<blockquote>
+<p>唯一，整个事件循环中仅存在一个；执行为同步，同一个事件循环中的microtasks会按队列顺序串行执行完毕</p>
+<ul>
+<li>process.nextTick</li>
+<li>promise</li>
+<li>Object.observe</li>
+<li>MutationObserver</li>
+</ul>
+</blockquote>
+<p>macrotask(宏任务)：</p>
+<ul>
+<li>setTimeout</li>
+<li>serInterval</li>
+<li>setImmediate</li>
+<li>I/O</li>
+<li>UI渲染</li>
+</ul>
+<blockquote>
+<p>先执行微任务 再执行宏任务</p>
+</blockquote>
+<p>如果遇到async的代码 await后面的程序就挂起 类似于微任务 等到后面的同步任务执行完了再执行</p>
+<p>最后上一个小栗子🌰<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'resolve'</span>)</span><br><span class="line">  resolve()</span><br><span class="line">&#125;))</span><br><span class="line">.then(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'promise then ...'</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"fun start"</span>)</span><br><span class="line">  <span class="keyword">const</span> aa = <span class="keyword">await</span> <span class="number">1</span> <span class="comment">// 到这里挂起，后面先不执行</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"fun end"</span>)</span><br><span class="line">&#125;</span><br><span class="line">fun()</span><br><span class="line"></span><br><span class="line"><span class="comment">// setTimeout 放入event table中 1秒后将回调函数放入宏任务的event queue中</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'setTimeout ...'</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">process.nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'nextTick ...'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'console ...'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">resolve</span><br><span class="line">fun start</span><br><span class="line"><span class="built_in">console</span> ...</span><br><span class="line">nextTick ...</span><br><span class="line">promise then ...</span><br><span class="line">fun end</span><br><span class="line">setTimeout ...</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/03/xiumi/" rel="next" title="vue+vue-ueditor-wrap+秀米">
+                <i class="fa fa-chevron-left"></i> vue+vue-ueditor-wrap+秀米
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/04/tryCatch/" rel="prev" title="try catch能捕获到哪些JS异常">
+                try catch能捕获到哪些JS异常 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -292,6 +449,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -312,8 +473,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -404,6 +574,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#EventLoop是什么"><span class="nav-number">1.</span> <span class="nav-text">EventLoop是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步任务的区分"><span class="nav-number">2.</span> <span class="nav-text">异步任务的区分</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -552,6 +738,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
