@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="js,">
+  <meta name="keywords" content="vue,koa,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="写代码时经常会用到 try catch，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？">
-<meta name="keywords" content="js">
+<meta name="description" content="Start构建一个数据通过 koa 的api获取，页面通过 vue 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面的增删改查，其中用到了前端 Vue框架 、koa 提供接口、验证 token、sequelize 操作 mysql 等，这里记录一些关键点。">
+<meta name="keywords" content="vue,koa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="try catch能捕获到哪些JS异常">
-<meta property="og:url" content="http://yoursite.com/2020/08/04/tryCatch/index.html">
+<meta property="og:title" content="vue+koa+mysql实现一个简单的todolist">
+<meta property="og:url" content="http://yoursite.com/2020/08/25/koa/index.html">
 <meta property="og:site_name" content="LXYu.♡">
-<meta property="og:description" content="写代码时经常会用到 try catch，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？">
+<meta property="og:description" content="Start构建一个数据通过 koa 的api获取，页面通过 vue 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面的增删改查，其中用到了前端 Vue框架 、koa 提供接口、验证 token、sequelize 操作 mysql 等，这里记录一些关键点。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-04T02:00:54.226Z">
+<meta property="og:updated_time" content="2020-09-04T07:31:36.320Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="try catch能捕获到哪些JS异常">
-<meta name="twitter:description" content="写代码时经常会用到 try catch，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？">
+<meta name="twitter:title" content="vue+koa+mysql实现一个简单的todolist">
+<meta name="twitter:description" content="Start构建一个数据通过 koa 的api获取，页面通过 vue 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面的增删改查，其中用到了前端 Vue框架 、koa 提供接口、验证 token、sequelize 操作 mysql 等，这里记录一些关键点。">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/08/04/tryCatch/">
+  <link rel="canonical" href="http://yoursite.com/2020/08/25/koa/">
 
 
 
 
 
-  <title>try catch能捕获到哪些JS异常 | LXYu.♡</title>
+  <title>vue+koa+mysql实现一个简单的todolist | LXYu.♡</title>
   
 
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/04/tryCatch/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/25/koa/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="鲤小鱼">
@@ -274,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">try catch能捕获到哪些JS异常</h1>
+          <h1 class="post-title" itemprop="name headline">vue+koa+mysql实现一个简单的todolist</h1>
         
 
         <div class="post-meta">
@@ -286,8 +286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-04T09:50:45+08:00">
-                2020-08-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-25T10:41:27+08:00">
+                2020-08-25
               </time>
             
 
@@ -309,8 +309,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
+                  <a href="/categories/koa/" itemprop="url" rel="index">
+                    <span itemprop="name">koa</span>
                   </a>
                 </span>
 
@@ -346,36 +346,97 @@
       
 
       
-        <blockquote>
-<p>写代码时经常会用到 <code>try catch</code>，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？</p>
-</blockquote>
+        <h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><p>构建一个数据通过 <code>koa</code> 的api获取，页面通过 <code>vue</code> 渲染的前后端都有的完整demo。包括一个登陆页面和一个todolist页面的增删改查，其中用到了前端 <code>Vue框架</code> 、<code>koa</code> 提供接口、验证 <code>token</code>、<code>sequelize</code> 操作 <code>mysql</code> 等，这里记录一些关键点。</p>
 <a id="more"></a>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>这里用到的是vue-cli2的webpack，项目创建好之后执行<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn </span><br><span class="line">yarn <span class="keyword">add </span>koa koa-router koa-logger koa-<span class="keyword">json </span>koa-<span class="keyword">bodyparser </span>nodemon vue-router element-ui axios koa-<span class="keyword">jwt </span><span class="keyword">bcrypt </span>kao-static</span><br></pre></td></tr></table></figure></p>
 <blockquote>
-<p><strong>简单解释就是：在报错的时候，线程执行已经进入 <code>try catch</code> 代码块，并且处在 <code>try catch</code> 里，才能被捕捉到。</strong>（之前，之后都无法捕捉异常）</p>
-</blockquote>
+<p>在根目录下创建server文件夹，及子文件夹</p>
 <ul>
-<li><h6 id="下面三个小栗子，解释一下-try-catch-的前中后"><a href="#下面三个小栗子，解释一下-try-catch-的前中后" class="headerlink" title="下面三个小栗子，解释一下 try catch 的前中后"></a>下面三个小栗子，解释一下 <code>try catch</code> 的前中后</h6></li>
+<li>config（数据库配置）</li>
+<li>controllers（控制层，根据页面的请求选取”数据层”中相应的数据，然后返回给页面）</li>
+<li>models（数据层，将数据库和表结构连起来）</li>
+<li>routes（路由）</li>
+<li>schema（表结构）</li>
 </ul>
-<p>🌰 例子1：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    a(</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>, e)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">Uncaught <span class="built_in">SyntaxError</span>: Unexpected token &#125;</span><br></pre></td></tr></table></figure></p>
-<p><em>例子1</em> 语法异常（SyntaxError），因为语法异常是在语法阶段就报错了，所以线程还没进入 <code>try catch</code> 代码块，就捕获不到异常。</p>
-<p>🌰 例子2：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function d () &#123;a.b&#125;</span><br><span class="line">try &#123;</span><br><span class="line">   d()</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">   console.log('error', e)</span><br><span class="line">&#125;</span><br><span class="line">// output</span><br><span class="line"><span class="keyword">error </span>ReferenceError: a is not defined</span><br></pre></td></tr></table></figure></p>
-<p><em>例子2</em> 报错的时机，是代码执行进入了 <code>try catch</code> ，执行 d 方法的时候，线程执行处在 <code>try</code> 里面，所以能捕捉到。</p>
-<p>🌰 例子3：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">   function d () &#123;a.b&#125;</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">   console.log('error', e)</span><br><span class="line">&#125;</span><br><span class="line">d()</span><br><span class="line">// output</span><br><span class="line"><span class="keyword">error </span>ReferenceError: a is not defined</span><br></pre></td></tr></table></figure></p>
-<p><em>例子3</em> 方法定义在 <code>try catch</code> 代码块里，但是执行方法在 <code>try catch</code> 外，执行 d 方法的时候报错，此时 try catch 已经执行完成，所以无法捕捉异常。</p>
-<p>三个例子之后应该能理解怎样的JS异常可以被捕获了，但是在我们用 <code>promise</code> 的时候发现相对于外部的 <code>try catch</code> ，Promise 没有异常！</p>
-<h3 id="promise-amp-try-catch"><a href="#promise-amp-try-catch" class="headerlink" title="promise &amp; try catch"></a>promise &amp; try catch</h3><p>🌰 例子4：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    a.b</span><br><span class="line">  &#125;).then(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>(v)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'error'</span>, e)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">Uncaught (<span class="keyword">in</span> promise) <span class="built_in">ReferenceError</span>: a is not defined</span><br></pre></td></tr></table></figure></p>
-<p><em>例子4</em> 线程在执行a.b的时候，适时向属于同步执行，<code>try catch</code> 并未执行完成，为什么捕获不到异常呢？</p>
-<p>事实上，<strong>Promise 的异常都是由 reject 和 Promise.prototype.catch 来捕获</strong>，不管是同步还是异步。</p>
-<p>核心原因是因为 <code>Promise</code> 在执行回调中都用 <code>try catch</code> 包裹起来了，其中所有的异常都被内部捕获到了，并未往上抛异常，所以异常都不会被外层的 <code>try catch</code> 捕捉。</p>
-<p>🌰 例子5：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      reject(<span class="string">'报错了'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">await</span> a()</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>, e)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">foo()</span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">error 报错了</span><br></pre></td></tr></table></figure></p>
-<p>为什么 <em>例子5</em> 的异常能被 <code>catch</code> 捕获到呢，因为报错的时候，线程执行已经进入了 <code>try catch</code> 代码块，并且异常由 reject 抛出，自然可以捕获到。</p>
-<p> ###总结：</p>
-<blockquote>
-<p><strong>1. 在报错的时候，线程执行已经进入 <code>try catch</code> 代码块，并且处在 <code>try catch</code> 里，才能被捕捉到。</strong></p>
 </blockquote>
 <blockquote>
-<p><strong>2. 不要用 <code>try catch</code> 包裹 <code>Promise</code>，我们只需要给 <code>Promise</code> 增加 Promise#catch 就 OK 了</strong></p>
+<p>在根目录下创建app.js作为koa的启动文件（具体代码见项目）</p>
 </blockquote>
+<p>后端：在控制台输入 <code>nodemon app.js</code>, 输出<code>Koa is listening in 8889</code>说明启动成功，并在8889端口监听。<br>前端：在控制台输入 <code>npm run dev</code> 后在 <code>localhost:8080</code> 可以展示前端页面。</p>
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>可以去官网下载<code>mysql</code>，我用到的可视化工具是<code>MySQLWorkbench</code></p>
+<p>安装好后开始创建数据表。用户表：用于登录验证。待办事项表用于展示待办事项。</p>
+<p>user表：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id(用戶id)</td>
+<td>int(自增)</td>
+</tr>
+<tr>
+<td>user_name(用户名)</td>
+<td>CHAR(50)</td>
+</tr>
+<tr>
+<td>password(密码)</td>
+<td>CHAR(128)</td>
+</tr>
+</tbody>
+</table>
+<p>—</p>
+<p>list表：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id(list的id)</td>
+<td>int(自增)</td>
+</tr>
+<tr>
+<td>user_id(用户id)</td>
+<td>int(11)</td>
+</tr>
+<tr>
+<td>content(代办内容)</td>
+<td>CHAR(255)</td>
+</tr>
+<tr>
+<td>status(代办状态)</td>
+<td>tinyint(1)</td>
+</tr>
+</tbody>
+</table>
+<p>—</p>
+<h2 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h2><p><code>sequelize</code> 理解为用简单的方式操作数据库的ORM框架。</p>
+<p><code>server/schema</code> 下新建两个文件，user.js和list.js，是数据库的两张表结构，可使用sequelize-auto直接导出表结构。</p>
+<p>在<code>server/config</code>下新建db.js, 用于初始化Sequelize和数据库的连接（具体代码见项目）</p>
+<h2 id="JSON-WEB-TOKEN"><a href="#JSON-WEB-TOKEN" class="headerlink" title="JSON-WEB-TOKEN"></a>JSON-WEB-TOKEN</h2><p>运用了JSON-WEB-TOKEN的登录系统应该是这样的：</p>
+<blockquote>
+<ol>
+<li>用户在登录页输入账号密码，将账号密码（加密后）发送请求给后端</li>
+<li>后端验证一下用户的账号和密码的信息，如果符合就发一个token返回给客户端，如果不符合就不发送token，返回验证错误信息。</li>
+<li>如果登录成功，客户端将token用某种方式存下来，之后要请求其他资源的时候，在请求头里带上这个token。</li>
+<li>后端收到请求信息，先验证下token是否有效，有效则下发请求的资源，无效则返回验证错误。</li>
+</ol>
+</blockquote>
+<p>通过这个token的方式，客户端和服务端之间的访问，是无状态的。也就是服务端不知道你这个用户到底在不在线，只要你发送的请求头里的token是正确的我就给你返回你想要的资源。这样能够不占用服务端的空间资源，而且如果涉及到服务器集群，如果服务器进行维护或者迁移或者需要CDN节点的分配的话，<code>无状态</code>的设计显然维护成本更低。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 用法 --&gt;</span></span><br><span class="line"></span><br><span class="line">const secret = 'vue-koa-demo' // 指定密钥，这是之后用来判断token合法性的标志</span><br><span class="line"></span><br><span class="line">jwt.sign(userToken, secret) // 签发token</span><br><span class="line"></span><br><span class="line">jwt.decode(token) // 解析token</span><br></pre></td></tr></table></figure>
+<h2 id="密码加密"><a href="#密码加密" class="headerlink" title="密码加密"></a>密码加密</h2><p>md5加密容易被破解，所以准备采用<code>bcrypt</code>的加密方式，全部走后端加密。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 验证密码是否正确</span></span><br><span class="line">bcrypt.compareSync(data<span class="selector-class">.password</span>, userInfo.password)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Token的发送与验证"><a href="#Token的发送与验证" class="headerlink" title="Token的发送与验证"></a>Token的发送与验证</h2><p>在全局发送请求<code>Header</code>上加入<code>Authorization</code>属性， 值是<code>Bearer token值</code><br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue<span class="selector-class">.prototype</span>.<span class="variable">$http</span><span class="selector-class">.defaults</span><span class="selector-class">.headers</span><span class="selector-class">.common</span>[<span class="string">'Authorization'</span>] = <span class="string">'Bearer '</span> + token</span><br></pre></td></tr></table></figure></p>
+<p>/api/* 都需要走token验证<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">koa</span><span class="selector-class">.use</span>(<span class="string">"/api"</span>,jwt(&#123;<span class="attribute">secret</span>: <span class="string">'vue-koa-demo'</span>&#125;),api.routes()) <span class="comment">// 所有走/api/打头的请求都需要经过jwt中间件的验证。secret密钥必须跟我们当初签发的secret一致</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Koa-serve静态资源"><a href="#Koa-serve静态资源" class="headerlink" title="Koa serve静态资源"></a>Koa serve静态资源</h2><p>项目<code>npm run dev</code>打包后<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> serve = <span class="keyword">require</span>(<span class="string">'koa-static'</span>)</span><br><span class="line"></span><br><span class="line">app.<span class="keyword">use</span>(serve(path.join(__dirname, <span class="string">'dist'</span>))) <span class="comment">// 将webpack打包好的项目目录作为Koa静态文件服务的目录</span></span><br></pre></td></tr></table></figure></p>
+<p>这样不用启前端项目，localhost:8889就可以访问打包好的静态资源页面。</p>
+<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2><p>这是一个前后端都有的完整小demo，结构清晰简单的小东西更容易理解和入门，完整项目<a href="https://github.com/Yu-Lxy/Daily_practice/tree/master/koa" target="_blank" rel="noopener">Github地址</a>。</p>
 
       
     </div>
@@ -393,7 +454,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js/" rel="tag"><i class="fa fa-tag"></i> js</a>
+            <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
+          
+            <a href="/tags/koa/" rel="tag"><i class="fa fa-tag"></i> koa</a>
           
         </div>
       
@@ -406,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/28/eventLoop/" rel="next" title="EventLoop 的简单理解">
-                <i class="fa fa-chevron-left"></i> EventLoop 的简单理解
+              <a href="/2020/08/04/tryCatch/" rel="next" title="try catch能捕获到哪些JS异常">
+                <i class="fa fa-chevron-left"></i> try catch能捕获到哪些JS异常
               </a>
             
           </div>
@@ -416,8 +479,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/08/25/koa/" rel="prev" title="vue+koa+mysql实现一个简单的todolist">
-                vue+koa+mysql实现一个简单的todolist <i class="fa fa-chevron-right"></i>
+              <a href="/2020/09/04/mongo/" rel="prev" title="第一次使用mongoDB的记录">
+                第一次使用mongoDB的记录 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -581,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#下面三个小栗子，解释一下-try-catch-的前中后"><span class="nav-number">1.</span> <span class="nav-text">下面三个小栗子，解释一下 try catch 的前中后</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#promise-amp-try-catch"><span class="nav-number"></span> <span class="nav-text">promise &amp; try catch</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Start"><span class="nav-number">1.</span> <span class="nav-text">Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">3.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequelize"><span class="nav-number">4.</span> <span class="nav-text">Sequelize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-WEB-TOKEN"><span class="nav-number">5.</span> <span class="nav-text">JSON-WEB-TOKEN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码加密"><span class="nav-number">6.</span> <span class="nav-text">密码加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Token的发送与验证"><span class="nav-number">7.</span> <span class="nav-text">Token的发送与验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Koa-serve静态资源"><span class="nav-number">8.</span> <span class="nav-text">Koa serve静态资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#End"><span class="nav-number">9.</span> <span class="nav-text">End</span></a></li></ol></div>
             
 
           </div>
