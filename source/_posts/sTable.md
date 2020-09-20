@@ -277,4 +277,57 @@ loadData () {
 > 采用组件内调用获取数据方法是因为，基本在和后端小伙伴定义数据结构的时候就统一了 table 和 pagination 的结构，所以在组件内部统一过滤数据可以让调用者代码更简洁，如果调用者需要返回值则可以设置属性。
 
 ### 拖动功能
-拖动要引入 `import Sortable from 'sortablejs'` ,
+拖动要引入 `import Sortable from 'sortablejs'` ，父组件调用时如果设置了 `drag` 那么组件内将初始化拖动功能。看一下初始化拖动的方法：
+```js
+/**
+  * 设置拖动
+  */
+setSort () {
+  const el = this.$refs.multipleTable.$el.querySelectorAll('.el-table__body-wrapper > table > tbody')[0]
+  if (this.drag && !this.sortable) {  // 如果没有创建sortable则创建
+    this.sortable = Sortable.create(el, {
+      ghostClass: 'sortable-ghost', // Class name for the drop placeholder,
+      setData (dataTransfer) {
+        dataTransfer.setData('Text', '')
+      },
+      onEnd: evt => { // 拖动后
+        const tempIndex = this.newList.splice(evt.oldIndex, 1)[0] // 获取当前拖动选项的id
+        this.newList.splice(evt.newIndex, 0, tempIndex) // 在新列表里的新位置插入拖动选项的id
+        this.$emit('newSort', this.newList)  // 发送给父组件新列表
+
+        // 拖动后需同步table内data数据
+        this.dataList.splice(evt.newIndex, 0, this.dataList.splice(evt.oldIndex, 1)[0]) // 在tableList的新位置插入拖动选项的数据
+        let newArray = this.dataList.slice(0)
+        this.dataList = []
+        this.$nextTick(() => {
+          this.dataList = newArray  // 重新赋值给dataList
+        })
+      }
+    })
+  } else if (!this.drag && this.sortable) { // 如果不需要拖动 但是创建过sortable 那就销毁
+    this.sortable.destroy()
+    this.sortable = null
+  }
+},
+```
+拖动后首先获取到当前拖动项的id，放到列表的新位置上，发送给父组件。
+之后table的数据也需要同步顺序，把当前拖动项的数据放到新的位置上返回一个新的数组，等到dom结构更新完成之后，重新赋值给dataList，这样就可以保证看到列表的顺序和实际的顺序是一样的。
+
+### 数据更新
+有一些业务场景需要更新table的数据，所以组件里写了一个 `refresh` 的方法，方便父组件更新数据。
+```js
+/**
+  * 表格重新加载方法
+  * 如果参数为 true, 则强制刷新到第一页
+  * @param Boolean bool
+  */
+refresh (bool = false) {
+  if (bool) {
+    this.currentPage = 1
+  }
+  this.loadData()
+},
+```
+
+## 总结
+整体思路大概就是这样，其中的一些逻辑也是根据后来业务需求加上的，还有一些分页、框选等相关方法这里没过多解释，完整代码[戳这里](https://github.com/Yu-Lxy/element-admin/blob/master/src/components/table/index.js)。
