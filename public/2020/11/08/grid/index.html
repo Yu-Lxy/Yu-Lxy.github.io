@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="css,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LXYu.♡" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Grid 布局与 Flex 布局有一定的相似性，都可以指定容器内部多个项目的位置。但是，它们也存在重大区别。 Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是一维布局。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是二维布局。Grid 布局远比 Flex 布局强大。 以上两段话都是阮一峰大神说的哈~😆本篇主要记录一些主要的概念">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grid网格布局常用属性总结">
+<meta property="og:url" content="http://yoursite.com/2020/11/08/grid/index.html">
+<meta property="og:site_name" content="LXYu.♡">
+<meta property="og:description" content="Grid 布局与 Flex 布局有一定的相似性，都可以指定容器内部多个项目的位置。但是，它们也存在重大区别。 Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是一维布局。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是二维布局。Grid 布局远比 Flex 布局强大。 以上两段话都是阮一峰大神说的哈~😆本篇主要记录一些主要的概念">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-11-08T12:52:43.216Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Grid网格布局常用属性总结">
+<meta name="twitter:description" content="Grid 布局与 Flex 布局有一定的相似性，都可以指定容器内部多个项目的位置。但是，它们也存在重大区别。 Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是一维布局。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是二维布局。Grid 布局远比 Flex 布局强大。 以上两段话都是阮一峰大神说的哈~😆本篇主要记录一些主要的概念">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/11/08/grid/">
+
+
+
+
+
+  <title>Grid网格布局常用属性总结 | LXYu.♡</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LXYu.♡</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">˙ ᵕ ˙ 這是我的地方</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <a href="https://github.com/Yu-Lxy" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#527f9c; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/08/grid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="鲤小鱼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/31298201?s=400&u=bf760848190371b7140df49fd93789b8d1072652&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LXYu.♡">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Grid网格布局常用属性总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-08T20:39:29+08:00">
+                2020-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Grid 布局与 Flex 布局有一定的相似性，都可以指定容器内部多个项目的位置。但是，它们也存在重大区别。</p>
+<p>Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是一维布局。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是二维布局。Grid 布局远比 Flex 布局强大。</p>
+<p>以上两段话都是阮一峰大神说的哈~😆<br>本篇主要记录一些主要的概念和常用的属性😏</p>
+<a id="more"></a>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h4 id="容器和项目"><a href="#容器和项目" class="headerlink" title="容器和项目"></a>容器和项目</h4><blockquote>
+<p>采用网格布局的区域，称为”容器“（container）。容器内部采用网格定位的子元素，称为”项目“（item）。</p>
+</blockquote>
+<h4 id="行和列"><a href="#行和列" class="headerlink" title="行和列"></a>行和列</h4><blockquote>
+<p>容器里面的水平区域称为”行“（row），垂直区域称为”列“（column）。</p>
+</blockquote>
+<h4 id="单元格"><a href="#单元格" class="headerlink" title="单元格"></a>单元格</h4><blockquote>
+<p>行和列交叉区域，称为”单元格“（cell）。</p>
+</blockquote>
+<h4 id="网格线"><a href="#网格线" class="headerlink" title="网格线"></a>网格线</h4><blockquote>
+<p>划分网格的线，称为”网格线“（grid line）。水平网格线划分出行，垂直网格线划分出列。</p>
+</blockquote>
+<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
+<li><code>display: grid</code>  指定一个容器采用网格布局</li>
+<li><code>display: inline-grid</code> 指定该元素为行内元素，内部采用网格布局</li>
+<li><code>grid-template-columns：10px 20px 30%</code> 列宽，每个值和每列一一对应，可像素或百分数</li>
+<li><code>grid-template-rows：10px 20px 30%</code> 行高，每个值和每行一一对应，可像素或百分数</li>
+<li><code>repeat()</code> 简化重复的值，例：grid-template-rows: repeat(3, 100px);</li>
+<li><code>auto-fill关键字</code> 自动填充个数，例：grid-template-columns: repeat(auto-fill, 100px);</li>
+<li><code>fr关键字</code> 比例关系，例：grid-template-columns: 1fr 1fr;</li>
+<li><code>minmax()</code> 长度范围，例：grid-template-columns: 1fr 1fr minmax(100px, 1fr);</li>
+<li><code>auto关键字</code> 自定宽度，例：grid-template-columns: 100px auto 100px;</li>
+<li><code>[]可定义网格线名字</code> 例：grid-template-columns: [c1] 100px [c2] 100px [c3] auto [c4];</li>
+<li><code>row-gap:10px</code> 行间距</li>
+<li><code>column-gap: 20px</code> 列间距</li>
+<li><code>gap: 10px 20px</code> 行间距和列间距的合并写法</li>
+<li><code>grid-auto-flow: row</code> 排列顺序，先行后列</li>
+<li><code>grid-auto-flow: row dense</code> 排列顺序，先行后列，紧密填满</li>
+<li><code>grid-auto-flow: column</code> 排列顺序，先列后行</li>
+<li><code>grid-auto-flow: column dense</code> 排列顺序，先列后行，紧密填满</li>
+<li><code>justify-items: start | end | center | stretch;</code> 设置单元格内容的水平位置（左中右）</li>
+<li><code>align-items: start | end | center | stretch;</code> 设置单元格内容的垂直位置（上中下）</li>
+<li><code>place-items: &lt;align-items&gt; &lt;justify-items&gt;;</code> align-items属性和justify-items属性的合并简写形式。例：place-items: start end;</li>
+<li><code>justify-content: start | end | center | stretch | space-around | space-between | space-evenly;</code> 整个内容区域在容器里面的水平位置（左中右）</li>
+<li><code>align-content: start | end | center | stretch | space-around | space-between | space-evenly;</code> 整个内容区域的垂直位置（上中下）</li>
+<li><code>place-content: &lt;align-content&gt; &lt;justify-content&gt;</code> align-content属性和justify-content属性的合并简写形式。</li>
+</ul>
+<h3 id="项目属性"><a href="#项目属性" class="headerlink" title="项目属性"></a>项目属性</h3><ul>
+<li><code>grid-column-start: 2</code> 指定项目的左边框所在的垂直网格线</li>
+<li><code>grid-column-end: 3</code> 指定项目的右边框所在的垂直网格线</li>
+<li><code>grid-row-start: 4</code> 指定项目的上边框所在的水平网格线</li>
+<li><code>grid-row-end: 5</code> 指定项目的下边框所在的水平网格线</li>
+<li><code>span关键字</code> 表示”跨越“，即左右边框（上下边框）之间跨越多少个网格，例：grid-column-start: span 2;</li>
+<li><code>grid-column 属性</code> 是grid-column-start和grid-column-end的合并简写形式，例：grid-column: 1 / 2;</li>
+<li><code>grid-row 属性</code> 是grid-row-start属性和grid-row-end的合并简写形式，例：grid-row: 1 / 3;</li>
+<li><code>grid-area 属性</code> 指定项目放在哪一个区域，例：grid-area: e;</li>
+<li><code>justify-self: start | end | center | stretch</code> 设置单元格内容的水平位置（左中右）</li>
+<li><code>align-self: start | end | center | stretch</code> 设置单元格内容的垂直位置（上中下）</li>
+<li><code>place-self: &lt;align-self&gt; &lt;justify-self&gt;</code> 是align-self属性和justify-self属性的合并简写形式</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"><i class="fa fa-tag"></i> css</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/09/sTable/" rel="next" title="后台管理系统element-admin——二次封装Table组件">
+                <i class="fa fa-chevron-left"></i> 后台管理系统element-admin——二次封装Table组件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars2.githubusercontent.com/u/31298201?s=400&u=bf760848190371b7140df49fd93789b8d1072652&v=4" alt="鲤小鱼">
+            
+              <p class="site-author-name" itemprop="name">鲤小鱼</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Yu-Lxy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/29c1fd87fce0" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lixiaoyu_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-cube"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#容器和项目"><span class="nav-number">1.1.</span> <span class="nav-text">容器和项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#行和列"><span class="nav-number">1.2.</span> <span class="nav-text">行和列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元格"><span class="nav-number">1.3.</span> <span class="nav-text">单元格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网格线"><span class="nav-number">1.4.</span> <span class="nav-text">网格线</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器属性"><span class="nav-number">2.</span> <span class="nav-text">容器属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目属性"><span class="nav-number">3.</span> <span class="nav-text">项目属性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lxy</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-user"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
