@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="vue,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LXYu.♡" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Start项目中使用表格灰常的频繁👿，所以一个简洁的表格组件，既能让代码变得优雅还可以省去很多重复的操作。">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后台管理系统element-admin——二次封装Table组件">
+<meta property="og:url" content="http://yoursite.com/2020/09/09/sTable/index.html">
+<meta property="og:site_name" content="LXYu.♡">
+<meta property="og:description" content="Start项目中使用表格灰常的频繁👿，所以一个简洁的表格组件，既能让代码变得优雅还可以省去很多重复的操作。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/09/09/sTable/table1.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/09/sTable/table2.png">
+<meta property="og:updated_time" content="2020-09-20T08:46:37.041Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="后台管理系统element-admin——二次封装Table组件">
+<meta name="twitter:description" content="Start项目中使用表格灰常的频繁👿，所以一个简洁的表格组件，既能让代码变得优雅还可以省去很多重复的操作。">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/09/sTable/table1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/09/sTable/">
+
+
+
+
+
+  <title>后台管理系统element-admin——二次封装Table组件 | LXYu.♡</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LXYu.♡</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">˙ ᵕ ˙ 這是我的地方</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <a href="https://github.com/Yu-Lxy" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#527f9c; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/09/sTable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="鲤小鱼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/31298201?s=400&u=bf760848190371b7140df49fd93789b8d1072652&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LXYu.♡">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">后台管理系统element-admin——二次封装Table组件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-09T14:34:51+08:00">
+                2020-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><p>项目中使用表格灰常的频繁👿，所以一个简洁的表格组件，既能让代码变得优雅还可以省去很多重复的操作。<br><a id="more"></a></p>
+<h2 id="element封装调用"><a href="#element封装调用" class="headerlink" title="element封装调用"></a>element封装调用</h2><p>element-ui已经为我们封装好了一层，这是element-ui的写法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;el-table</span><br><span class="line">    :data=<span class="string">"tableData"</span></span><br><span class="line">    style=<span class="string">"width: 500px"</span>&gt;</span><br><span class="line">    &lt;el-table-column prop=<span class="string">"name"</span> label=<span class="string">"姓名"</span> width=<span class="string">"180"</span>&gt;&lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column label="日期" width="120"&gt;</span><br><span class="line">      &lt;template slot-scope="scope"&gt;&#123;&#123; '加个前缀😝' + scope.row.date &#125;&#125;&lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">    &lt;el-table-column fixed="right" label="操作" width="120"&gt;</span><br><span class="line">      &lt;template slot-scope="scope"&gt;</span><br><span class="line">        &lt;el-button @click.native.prevent="deleteRow(scope.$index, tableData)" type="text" size="small"&gt;</span><br><span class="line">          移除</span><br><span class="line">        &lt;/el-button&gt;</span><br><span class="line">      &lt;/template&gt;</span><br><span class="line">    &lt;/el-table-column&gt;</span><br><span class="line">  &lt;/el-table&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        tableData: [&#123;</span><br><span class="line">          date: '2016-05-02',</span><br><span class="line">          name: '王小虎',</span><br><span class="line">          address: '上海市普陀区金沙江路 1518 弄'</span><br><span class="line">        &#125;,&#123;</span><br><span class="line">          date: '2016-05-02',</span><br><span class="line">          name: '王小虎',</span><br><span class="line">          address: '上海市普陀区金沙江路 1518 弄'</span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      deleteRow(index, rows) &#123;</span><br><span class="line">        rows.splice(index, 1)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/09/09/sTable/table1.png" alt="element-table"></p>
+<p>虽然已经封装的很好了，但感觉还是不够简洁，并且还想将分页功能、loading功能、拖动功能都通过配置参数的方式来选择是否调用，所以进行了二次封装，看一下封装过后的调用代码：</p>
+<h2 id="二次封装后调用"><a href="#二次封装后调用" class="headerlink" title="二次封装后调用"></a>二次封装后调用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;s-table ref=<span class="string">"sTable"</span> :data=<span class="string">"loadData"</span> :columns=<span class="string">"columns"</span>&gt;</span><br><span class="line">    &lt;div slot=<span class="string">"action"</span> slot-scope=<span class="string">"&#123;row&#125;"</span>&gt;</span><br><span class="line">      &lt;el-button type=<span class="string">"primary"</span> @click=<span class="string">"deleteRow(row)"</span>&gt;移除&lt;<span class="regexp">/el-button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/s-table&gt;</span></span><br><span class="line"><span class="regexp">&lt;template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">import STable from '@/</span>components/table/index<span class="string">'</span></span><br><span class="line"><span class="string">export default &#123;</span></span><br><span class="line"><span class="string">  components: &#123;</span></span><br><span class="line"><span class="string">    STable</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">  data () &#123;</span></span><br><span class="line"><span class="string">    return &#123;</span></span><br><span class="line"><span class="string">      columns: [</span></span><br><span class="line"><span class="string">        &#123;name: '</span>姓名<span class="string">', desc: '</span>name<span class="string">', width: '</span><span class="number">100</span><span class="string">'&#125;,</span></span><br><span class="line"><span class="string">        &#123;name: '</span>日期<span class="string">', desc: '</span>date<span class="string">', width: '</span><span class="number">220</span><span class="string">', filter: true, filterFun: (row) =&gt; &#123; return `加个前缀😝 $&#123;row.date&#125;` &#125;&#125;,</span></span><br><span class="line"><span class="string">        &#123;name: '</span>操作<span class="string">', desc: '</span>action<span class="string">', width: '</span><span class="number">320</span><span class="string">', slot: true, fixed: '</span>right<span class="string">'&#125;</span></span><br><span class="line"><span class="string">      ],</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;,</span></span><br><span class="line"><span class="string">  methods: &#123;</span></span><br><span class="line"><span class="string">    loadData: param =&gt; &#123;</span></span><br><span class="line"><span class="string">      return getData()</span></span><br><span class="line"><span class="string">        .then(res =&gt; &#123;</span></span><br><span class="line"><span class="string">          return res</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2020/09/09/sTable/table2.png" alt="s-table"></p>
+<p>引入组件之后，table的数据由组件内部主动调用并返回，表格的每一列不再是 <code>el-table-column</code> 标签，而是由 <code>columns</code> 数组传递每一列信息，还包括了 <code>loading、pagination</code> 组件的逻辑，不用每次都处理同样的逻辑了。其中还包含了拖拽排序、选中操作等常用的功能。</p>
+<h2 id="开始写"><a href="#开始写" class="headerlink" title="开始写"></a>开始写</h2><p>下面看一下二次封装table组件的思路吧~</p>
+<h3 id="JSX写法"><a href="#JSX写法" class="headerlink" title="JSX写法"></a>JSX写法</h3><p><code>JSX</code> 就是Javascript和XML结合的一种格式。React发明了JSX，利用HTML语法来创建虚拟DOM。当遇到 <code>&lt;</code> ，JSX就当HTML解析，遇到 <code>{</code> 就当JavaScript解析。<br>我为什么用jsx呢？一方面是之前的一版template写法写的实在是看着很”chou”，另一方面想学习jsx语法和render函数<a href="https://cn.vuejs.org/v2/guide/render-function.html" target="_blank" rel="noopener">官方文档看这里</a>。</p>
+<h3 id="主思路"><a href="#主思路" class="headerlink" title="主思路"></a>主思路</h3><blockquote>
+<p>从结构上来看，主要分为两部分：<code>table</code> 和 <code>pagination</code> ，而 <code>table</code> 中又有 <code>column</code> 。</p>
+</blockquote>
+<blockquote>
+<p>其次就是数据的加载和过滤，默认主动调用数据加载，统一处理好数据结构（<code>table</code> 所需的 <code>list</code> ，分页组件所需的数据等）后，按需返回。</p>
+</blockquote>
+<blockquote>
+<p>拖动功能的初始化和处理。</p>
+</blockquote>
+<blockquote>
+<p>table数据的更新机制。</p>
+</blockquote>
+<hr>
+<p>所以主结构是这样的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">render () &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123; <span class="keyword">this</span>.renderTable() &#125;</span><br><span class="line">      &#123; <span class="keyword">this</span>.renderPage() &#125;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>因为分页组件根据外部props属性决定使用或者不使用，并且有一些自定义样式，所以改成这样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">render () &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123; <span class="keyword">this</span>.renderTable() &#125;</span><br><span class="line">      &lt;div style=&#123;<span class="keyword">this</span>.pageClass&#125;&gt;&#123; <span class="keyword">this</span>.showPagination ? <span class="keyword">this</span>.renderPage() : <span class="string">''</span> &#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="renderTable"><a href="#renderTable" class="headerlink" title="renderTable"></a>renderTable</h3><p>下面看一下 <code>renderTable</code> 中是怎么写的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * renderTable</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">renderTable () &#123;</span><br><span class="line">  <span class="keyword">const</span> props = &#123;</span><br><span class="line">    border: <span class="literal">true</span>, <span class="comment">// table的边框</span></span><br><span class="line">    size: <span class="keyword">this</span>.tableSize, <span class="comment">// table的大小</span></span><br><span class="line">    data: <span class="keyword">this</span>.dataList,  <span class="comment">// table需要的数据</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;el-table ref=<span class="string">"multipleTable"</span></span><br><span class="line">      &#123;...&#123; props &#125;&#125;  <span class="comment">// 属性绑定</span></span><br><span class="line">      v-loading=&#123;<span class="keyword">this</span>.tableLoading&#125; <span class="comment">// table的loading</span></span><br><span class="line">      on-selection-change=&#123;<span class="keyword">this</span>.changeFun&#125;  <span class="comment">// 选中某行的回调</span></span><br><span class="line">      on-select-all=&#123;<span class="keyword">this</span>.selectAll&#125;&gt; <span class="comment">// 选中所有行的回调</span></span><br><span class="line">      &#123;<span class="keyword">this</span>.columns.map(<span class="function"><span class="params">item</span> =&gt;</span> <span class="keyword">this</span>.renderTableColumn(item))&#125; <span class="comment">// 遍历每一列</span></span><br><span class="line">    &lt;<span class="regexp">/el-table&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;,</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>renderTable主要思路就是</strong>：先配好 table 的属性 <code>props</code> ，return 里返回 table 的结构，结构里 <code>绑定属性和方法</code> 。里面的每一列用 <code>mpa</code> 函数遍历，再用 <code>renderTableColumn</code> 渲染。</p>
+</blockquote>
+<h3 id="renderTableColumn"><a href="#renderTableColumn" class="headerlink" title="renderTableColumn"></a>renderTableColumn</h3><p>渲染列的render函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * renderColumn</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">renderTableColumn (item) &#123;</span><br><span class="line">  <span class="comment">// TableColumn配置的属性</span></span><br><span class="line">  <span class="keyword">const</span> props = &#123;</span><br><span class="line">    prop: item.desc,</span><br><span class="line">    label: item.name,</span><br><span class="line">    align: <span class="string">'center'</span>,</span><br><span class="line">    key: item.desc,</span><br><span class="line">    width: item.fixedWidth == <span class="literal">undefined</span> ? <span class="string">'auto'</span> : item.fixedWidth,</span><br><span class="line">    minWidth: item.width == <span class="literal">undefined</span> ? <span class="string">'auto'</span> : item.width,</span><br><span class="line">    fixed: item.fixed,</span><br><span class="line">    showOverflowTooltip: item.tooltip ? <span class="literal">true</span> : <span class="literal">false</span>,</span><br><span class="line">    sortable: item.sortable ? <span class="string">'custom'</span> : <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="comment">// 这里需要判断当前列(item.type)的属性，如果有type(通常type用于带select选项的列)就展示带type的列。如果没有就展示正常列。</span></span><br><span class="line">    item.type</span><br><span class="line">      ? &lt;el-table-column &#123;...&#123; props &#125;&#125; type=&#123;item.type&#125; selectable=&#123;item.selectable&#125;/&gt; // 带type的列</span><br><span class="line">      : &lt;el-table-column &#123;...&#123; props &#125;&#125; &#123;...&#123;scopedSlots: &#123; // 不带type的列</span><br><span class="line">        default: (scope) =&gt; &#123;</span><br><span class="line">          if (item.slot) &#123; </span><br><span class="line">            // 如果设置了slot，就设置一个插槽并且自带返回值</span><br><span class="line">            return this.$scopedSlots[item.desc](scope)</span><br><span class="line">          &#125; else if (item.pic) &#123;</span><br><span class="line">            // 如果设置了pic，就返回一个img的结构</span><br><span class="line">            return (&lt;img src=&#123;scope.row[item.desc]&#125; style=&#123;&#123;width: item.width - 24 + 'px', borderRadius: '5px'&#125;&#125;/&gt;)</span><br><span class="line">          &#125; else if (item.click) &#123;</span><br><span class="line">            // 如果带有点击事件的，就设置点击后的回调，还带有filter的回调。</span><br><span class="line">            return (&lt;div style=&#123;item.style&#125; onClick=&#123;this.btnClickfunc.bind(item, scope.row, item.desc)&#125;&gt;&#123;item.filter ? item.filterFun(scope.row) : scope.row[item.desc]&#125;&lt;/div&gt;)</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">            // 除去以上几种，普通的都直接返回通用的dom结构，带tooltip、filter的回调。</span><br><span class="line">            return (&lt;div style=&#123;item.tooltip ? &#123;...this.tooltip, ...item.style&#125; : item.style&#125;&gt;&#123;item.filter ? item.filterFun(scope.row) : scope.row[item.desc]&#125;&lt;/div&gt;)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;&#125;&#125;/&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>renderTableColumn主要思路就是</strong>：首先每一列的信息进来先看有没有带type，常见的就是带选择框的（也就是type=”selection”）的，如果是就展示带type的列，如果不是就正常列。</p>
+</blockquote>
+<blockquote>
+<p>正常列里面如果是带有插槽属性的，就设置一个插槽并传递参数（插槽相关知识可以参考<a href="https://www.jianshu.com/p/3af8552449fb" target="_blank" rel="noopener">这篇</a>）；<br>如果设置了本列需要展示pic，就返回一个img结构；<br>如果设置带有点击事件，那就返回一个带有点击回调的结构；<br>其余的都返回正常结构，并带有tooltip、filter的回调。</p>
+</blockquote>
+<h3 id="renderPage"><a href="#renderPage" class="headerlink" title="renderPage"></a>renderPage</h3><p>渲染分页组件的render函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * renderPage</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">renderPage () &#123;</span><br><span class="line">  <span class="keyword">const</span> props = &#123;</span><br><span class="line">    background: <span class="literal">true</span>,</span><br><span class="line">    small: <span class="keyword">this</span>.pageSmall,</span><br><span class="line">    currentPage: <span class="keyword">this</span>.currentPage,</span><br><span class="line">    pageSizes: [<span class="number">15</span>, <span class="number">30</span>, <span class="number">60</span>, <span class="number">120</span>],</span><br><span class="line">    pageSize: <span class="keyword">this</span>.pageSize,</span><br><span class="line">    total: <span class="keyword">this</span>.total,</span><br><span class="line">    layout: <span class="string">'total, sizes, prev, pager, next, jumper'</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;el-pagination &#123;...&#123; props &#125;&#125; on-current-change=&#123;<span class="keyword">this</span>.handleCurrentChange&#125; on-size-change=&#123;<span class="keyword">this</span>.handleSizeChange&#125; style=&#123;<span class="keyword">this</span>.pageStyle&#125;/&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>同样的思路：设置props，绑定属性和方法。</p>
+</blockquote>
+<h3 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h3><p>结构大概搭好之后考虑一下数据问题，默认是主动加载数据的，但也有不需要一加载组件就请求数据的，所以我们在mounted函数内以 <code>isInit</code> 属性按需请求，下面是 <code>loadData</code> 函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 数据加载</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">loadData () &#123;</span><br><span class="line">  <span class="keyword">this</span>.tableLoading = <span class="literal">true</span>  <span class="comment">// table的loading</span></span><br><span class="line">  <span class="keyword">const</span> param = <span class="keyword">this</span>.showPagination <span class="comment">// 分页信息</span></span><br><span class="line">    ? &#123; <span class="attr">page</span>: <span class="keyword">this</span>.currentPage, <span class="attr">size</span>: <span class="keyword">this</span>.pageSize &#125;</span><br><span class="line">    : <span class="string">''</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.data &amp;&amp; <span class="keyword">this</span>.data <span class="keyword">instanceof</span> <span class="built_in">Array</span>) &#123; <span class="comment">// 如果数据是数组就直接赋值给dataList</span></span><br><span class="line">    <span class="keyword">this</span>.tableLoading = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">this</span>.dataList = <span class="keyword">this</span>.data</span><br><span class="line">    <span class="comment">// 调用初始化拖动方法</span></span><br><span class="line">    <span class="keyword">this</span>.dragInit()</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="comment">// 如果data是一个返回值是promise的函数，就调用并then。</span></span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">this</span>.data(param)</span><br><span class="line">    <span class="keyword">if</span> ((<span class="keyword">typeof</span> result === <span class="string">'object'</span> || <span class="keyword">typeof</span> result === <span class="string">'function'</span>) &amp;&amp; <span class="keyword">typeof</span> result.then === <span class="string">'function'</span>) &#123;</span><br><span class="line">      result.then(<span class="function"><span class="params">rsp</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 处理数据，给table组件、给分页组件</span></span><br><span class="line">        <span class="keyword">this</span>.currentPage = rsp.data.currentPage</span><br><span class="line">        <span class="keyword">this</span>.total = rsp.data.totalElement</span><br><span class="line">        <span class="keyword">this</span>.tableLoading = <span class="literal">false</span></span><br><span class="line">        <span class="keyword">this</span>.dataList = rsp.data.list</span><br><span class="line">        <span class="comment">// 如果父组件需要返回值就发送过去</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.needData) &#123;</span><br><span class="line">          <span class="keyword">this</span>.$emit(<span class="string">'allBackData'</span>, rsp.data)</span><br><span class="line">          <span class="keyword">this</span>.$emit(<span class="string">'backData'</span>, rsp.data.list, <span class="keyword">this</span>.currentPage, <span class="keyword">this</span>.pageSize)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 调用初始化拖动方法</span></span><br><span class="line">        <span class="keyword">this</span>.dragInit()</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>采用组件内调用获取数据方法是因为，基本在和后端小伙伴定义数据结构的时候就统一了 table 和 pagination 的结构，所以在组件内部统一过滤数据可以让调用者代码更简洁，如果调用者需要返回值则可以设置属性。</p>
+</blockquote>
+<h3 id="拖动功能"><a href="#拖动功能" class="headerlink" title="拖动功能"></a>拖动功能</h3><p>拖动要引入 <code>import Sortable from &#39;sortablejs&#39;</code> ，父组件调用时如果设置了 <code>drag</code> 那么组件内将初始化拖动功能。看一下初始化拖动的方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 设置拖动</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">setSort () &#123;</span><br><span class="line">  <span class="keyword">const</span> el = <span class="keyword">this</span>.$refs.multipleTable.$el.querySelectorAll(<span class="string">'.el-table__body-wrapper &gt; table &gt; tbody'</span>)[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.drag &amp;&amp; !<span class="keyword">this</span>.sortable) &#123;  <span class="comment">// 如果没有创建sortable则创建</span></span><br><span class="line">    <span class="keyword">this</span>.sortable = Sortable.create(el, &#123;</span><br><span class="line">      ghostClass: <span class="string">'sortable-ghost'</span>, <span class="comment">// Class name for the drop placeholder,</span></span><br><span class="line">      setData (dataTransfer) &#123;</span><br><span class="line">        dataTransfer.setData(<span class="string">'Text'</span>, <span class="string">''</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      onEnd: <span class="function"><span class="params">evt</span> =&gt;</span> &#123; <span class="comment">// 拖动后</span></span><br><span class="line">        <span class="keyword">const</span> tempIndex = <span class="keyword">this</span>.newList.splice(evt.oldIndex, <span class="number">1</span>)[<span class="number">0</span>] <span class="comment">// 获取当前拖动选项的id</span></span><br><span class="line">        <span class="keyword">this</span>.newList.splice(evt.newIndex, <span class="number">0</span>, tempIndex) <span class="comment">// 在新列表里的新位置插入拖动选项的id</span></span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'newSort'</span>, <span class="keyword">this</span>.newList)  <span class="comment">// 发送给父组件新列表</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 拖动后需同步table内data数据</span></span><br><span class="line">        <span class="keyword">this</span>.dataList.splice(evt.newIndex, <span class="number">0</span>, <span class="keyword">this</span>.dataList.splice(evt.oldIndex, <span class="number">1</span>)[<span class="number">0</span>]) <span class="comment">// 在tableList的新位置插入拖动选项的数据</span></span><br><span class="line">        <span class="keyword">let</span> newArray = <span class="keyword">this</span>.dataList.slice(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">this</span>.dataList = []</span><br><span class="line">        <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>.dataList = newArray  <span class="comment">// 重新赋值给dataList</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!<span class="keyword">this</span>.drag &amp;&amp; <span class="keyword">this</span>.sortable) &#123; <span class="comment">// 如果不需要拖动 但是创建过sortable 那就销毁</span></span><br><span class="line">    <span class="keyword">this</span>.sortable.destroy()</span><br><span class="line">    <span class="keyword">this</span>.sortable = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>拖动后首先获取到当前拖动项的id，放到列表的新位置上，发送给父组件。<br>之后table的数据也需要同步顺序，把当前拖动项的数据放到新的位置上返回一个新的数组，等到dom结构更新完成之后，重新赋值给dataList，这样就可以保证看到列表的顺序和实际的顺序是一样的。</p>
+<h3 id="数据更新"><a href="#数据更新" class="headerlink" title="数据更新"></a>数据更新</h3><p>有一些业务场景需要更新table的数据，所以组件里写了一个 <code>refresh</code> 的方法，方便父组件更新数据。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 表格重新加载方法</span></span><br><span class="line"><span class="comment">  * 如果参数为 true, 则强制刷新到第一页</span></span><br><span class="line"><span class="comment">  * @param Boolean bool</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">refresh (bool = <span class="literal">false</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (bool) &#123;</span><br><span class="line">    <span class="keyword">this</span>.currentPage = <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.loadData()</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整体思路大概就是这样，其中的一些逻辑也是根据后来业务需求加上的，还有一些分页、框选等相关方法这里没过多解释，完整代码<a href="https://github.com/Yu-Lxy/element-admin/blob/master/src/components/table/index.js" target="_blank" rel="noopener">戳这里</a>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/08/element-admin/" rel="next" title="后台管理系统element-admin——登录权限篇">
+                <i class="fa fa-chevron-left"></i> 后台管理系统element-admin——登录权限篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars2.githubusercontent.com/u/31298201?s=400&u=bf760848190371b7140df49fd93789b8d1072652&v=4" alt="鲤小鱼">
+            
+              <p class="site-author-name" itemprop="name">鲤小鱼</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Yu-Lxy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/29c1fd87fce0" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lixiaoyu_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-cube"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Start"><span class="nav-number">1.</span> <span class="nav-text">Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#element封装调用"><span class="nav-number">2.</span> <span class="nav-text">element封装调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二次封装后调用"><span class="nav-number">3.</span> <span class="nav-text">二次封装后调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始写"><span class="nav-number">4.</span> <span class="nav-text">开始写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSX写法"><span class="nav-number">4.1.</span> <span class="nav-text">JSX写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主思路"><span class="nav-number">4.2.</span> <span class="nav-text">主思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#renderTable"><span class="nav-number">4.3.</span> <span class="nav-text">renderTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#renderTableColumn"><span class="nav-number">4.4.</span> <span class="nav-text">renderTableColumn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#renderPage"><span class="nav-number">4.5.</span> <span class="nav-text">renderPage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据加载"><span class="nav-number">4.6.</span> <span class="nav-text">数据加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拖动功能"><span class="nav-number">4.7.</span> <span class="nav-text">拖动功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据更新"><span class="nav-number">4.8.</span> <span class="nav-text">数据更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lxy</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-user"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
