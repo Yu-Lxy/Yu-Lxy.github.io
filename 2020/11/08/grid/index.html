@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="js,">
+  <meta name="keywords" content="css,">
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="写代码时经常会用到 try catch，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？">
-<meta name="keywords" content="js">
+<meta name="description" content="Grid 布局与 Flex 布局有一定的相似性，都可以指定容器内部多个项目的位置。但是，它们也存在重大区别。 Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是一维布局。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是二维布局。Grid 布局远比 Flex 布局强大。 以上两段话都是阮一峰大神说的哈~😆本篇主要记录一些主要的概念">
+<meta name="keywords" content="css">
 <meta property="og:type" content="article">
-<meta property="og:title" content="try catch能捕获到哪些JS异常">
-<meta property="og:url" content="http://yoursite.com/2020/08/04/tryCatch/index.html">
+<meta property="og:title" content="Grid网格布局常用属性总结">
+<meta property="og:url" content="http://yoursite.com/2020/11/08/grid/index.html">
 <meta property="og:site_name" content="LXYu.♡">
-<meta property="og:description" content="写代码时经常会用到 try catch，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？">
+<meta property="og:description" content="Grid 布局与 Flex 布局有一定的相似性，都可以指定容器内部多个项目的位置。但是，它们也存在重大区别。 Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是一维布局。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是二维布局。Grid 布局远比 Flex 布局强大。 以上两段话都是阮一峰大神说的哈~😆本篇主要记录一些主要的概念">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-04T02:00:54.226Z">
+<meta property="og:updated_time" content="2020-11-08T12:52:43.216Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="try catch能捕获到哪些JS异常">
-<meta name="twitter:description" content="写代码时经常会用到 try catch，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？">
+<meta name="twitter:title" content="Grid网格布局常用属性总结">
+<meta name="twitter:description" content="Grid 布局与 Flex 布局有一定的相似性，都可以指定容器内部多个项目的位置。但是，它们也存在重大区别。 Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是一维布局。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是二维布局。Grid 布局远比 Flex 布局强大。 以上两段话都是阮一峰大神说的哈~😆本篇主要记录一些主要的概念">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/08/04/tryCatch/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/08/grid/">
 
 
 
 
 
-  <title>try catch能捕获到哪些JS异常 | LXYu.♡</title>
+  <title>Grid网格布局常用属性总结 | LXYu.♡</title>
   
 
 
@@ -257,7 +257,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/04/tryCatch/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/08/grid/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="鲤小鱼">
@@ -274,7 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">try catch能捕获到哪些JS异常</h1>
+          <h1 class="post-title" itemprop="name headline">Grid网格布局常用属性总结</h1>
         
 
         <div class="post-meta">
@@ -286,8 +286,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-04T09:50:45+08:00">
-                2020-08-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-08T20:39:29+08:00">
+                2020-11-08
               </time>
             
 
@@ -309,8 +309,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
                   </a>
                 </span>
 
@@ -346,36 +346,60 @@
       
 
       
-        <blockquote>
-<p>写代码时经常会用到 <code>try catch</code>，防止一些JS报错，导致页面挂掉。那么到底哪些JS异常能被捕获到呢？</p>
-</blockquote>
+        <p>Grid 布局与 Flex 布局有一定的相似性，都可以指定容器内部多个项目的位置。但是，它们也存在重大区别。</p>
+<p>Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是一维布局。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是二维布局。Grid 布局远比 Flex 布局强大。</p>
+<p>以上两段话都是阮一峰大神说的哈~😆<br>本篇主要记录一些主要的概念和常用的属性😏</p>
 <a id="more"></a>
-<blockquote>
-<p><strong>简单解释就是：在报错的时候，线程执行已经进入 <code>try catch</code> 代码块，并且处在 <code>try catch</code> 里，才能被捕捉到。</strong>（之前，之后都无法捕捉异常）</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h4 id="容器和项目"><a href="#容器和项目" class="headerlink" title="容器和项目"></a>容器和项目</h4><blockquote>
+<p>采用网格布局的区域，称为”容器“（container）。容器内部采用网格定位的子元素，称为”项目“（item）。</p>
 </blockquote>
-<ul>
-<li><h6 id="下面三个小栗子，解释一下-try-catch-的前中后"><a href="#下面三个小栗子，解释一下-try-catch-的前中后" class="headerlink" title="下面三个小栗子，解释一下 try catch 的前中后"></a>下面三个小栗子，解释一下 <code>try catch</code> 的前中后</h6></li>
+<h4 id="行和列"><a href="#行和列" class="headerlink" title="行和列"></a>行和列</h4><blockquote>
+<p>容器里面的水平区域称为”行“（row），垂直区域称为”列“（column）。</p>
+</blockquote>
+<h4 id="单元格"><a href="#单元格" class="headerlink" title="单元格"></a>单元格</h4><blockquote>
+<p>行和列交叉区域，称为”单元格“（cell）。</p>
+</blockquote>
+<h4 id="网格线"><a href="#网格线" class="headerlink" title="网格线"></a>网格线</h4><blockquote>
+<p>划分网格的线，称为”网格线“（grid line）。水平网格线划分出行，垂直网格线划分出列。</p>
+</blockquote>
+<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3><ul>
+<li><code>display: grid</code>  指定一个容器采用网格布局</li>
+<li><code>display: inline-grid</code> 指定该元素为行内元素，内部采用网格布局</li>
+<li><code>grid-template-columns：10px 20px 30%</code> 列宽，每个值和每列一一对应，可像素或百分数</li>
+<li><code>grid-template-rows：10px 20px 30%</code> 行高，每个值和每行一一对应，可像素或百分数</li>
+<li><code>repeat()</code> 简化重复的值，例：grid-template-rows: repeat(3, 100px);</li>
+<li><code>auto-fill关键字</code> 自动填充个数，例：grid-template-columns: repeat(auto-fill, 100px);</li>
+<li><code>fr关键字</code> 比例关系，例：grid-template-columns: 1fr 1fr;</li>
+<li><code>minmax()</code> 长度范围，例：grid-template-columns: 1fr 1fr minmax(100px, 1fr);</li>
+<li><code>auto关键字</code> 自定宽度，例：grid-template-columns: 100px auto 100px;</li>
+<li><code>[]可定义网格线名字</code> 例：grid-template-columns: [c1] 100px [c2] 100px [c3] auto [c4];</li>
+<li><code>row-gap:10px</code> 行间距</li>
+<li><code>column-gap: 20px</code> 列间距</li>
+<li><code>gap: 10px 20px</code> 行间距和列间距的合并写法</li>
+<li><code>grid-auto-flow: row</code> 排列顺序，先行后列</li>
+<li><code>grid-auto-flow: row dense</code> 排列顺序，先行后列，紧密填满</li>
+<li><code>grid-auto-flow: column</code> 排列顺序，先列后行</li>
+<li><code>grid-auto-flow: column dense</code> 排列顺序，先列后行，紧密填满</li>
+<li><code>justify-items: start | end | center | stretch;</code> 设置单元格内容的水平位置（左中右）</li>
+<li><code>align-items: start | end | center | stretch;</code> 设置单元格内容的垂直位置（上中下）</li>
+<li><code>place-items: &lt;align-items&gt; &lt;justify-items&gt;;</code> align-items属性和justify-items属性的合并简写形式。例：place-items: start end;</li>
+<li><code>justify-content: start | end | center | stretch | space-around | space-between | space-evenly;</code> 整个内容区域在容器里面的水平位置（左中右）</li>
+<li><code>align-content: start | end | center | stretch | space-around | space-between | space-evenly;</code> 整个内容区域的垂直位置（上中下）</li>
+<li><code>place-content: &lt;align-content&gt; &lt;justify-content&gt;</code> align-content属性和justify-content属性的合并简写形式。</li>
 </ul>
-<p>🌰 例子1：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    a(</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>, e)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">Uncaught <span class="built_in">SyntaxError</span>: Unexpected token &#125;</span><br></pre></td></tr></table></figure></p>
-<p><em>例子1</em> 语法异常（SyntaxError），因为语法异常是在语法阶段就报错了，所以线程还没进入 <code>try catch</code> 代码块，就捕获不到异常。</p>
-<p>🌰 例子2：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function d () &#123;a.b&#125;</span><br><span class="line">try &#123;</span><br><span class="line">   d()</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">   console.log('error', e)</span><br><span class="line">&#125;</span><br><span class="line">// output</span><br><span class="line"><span class="keyword">error </span>ReferenceError: a is not defined</span><br></pre></td></tr></table></figure></p>
-<p><em>例子2</em> 报错的时机，是代码执行进入了 <code>try catch</code> ，执行 d 方法的时候，线程执行处在 <code>try</code> 里面，所以能捕捉到。</p>
-<p>🌰 例子3：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">   function d () &#123;a.b&#125;</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">   console.log('error', e)</span><br><span class="line">&#125;</span><br><span class="line">d()</span><br><span class="line">// output</span><br><span class="line"><span class="keyword">error </span>ReferenceError: a is not defined</span><br></pre></td></tr></table></figure></p>
-<p><em>例子3</em> 方法定义在 <code>try catch</code> 代码块里，但是执行方法在 <code>try catch</code> 外，执行 d 方法的时候报错，此时 try catch 已经执行完成，所以无法捕捉异常。</p>
-<p>三个例子之后应该能理解怎样的JS异常可以被捕获了，但是在我们用 <code>promise</code> 的时候发现相对于外部的 <code>try catch</code> ，Promise 没有异常！</p>
-<h3 id="promise-amp-try-catch"><a href="#promise-amp-try-catch" class="headerlink" title="promise &amp; try catch"></a>promise &amp; try catch</h3><p>🌰 例子4：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    a.b</span><br><span class="line">  &#125;).then(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>(v)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'error'</span>, e)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">Uncaught (<span class="keyword">in</span> promise) <span class="built_in">ReferenceError</span>: a is not defined</span><br></pre></td></tr></table></figure></p>
-<p><em>例子4</em> 线程在执行a.b的时候，适时向属于同步执行，<code>try catch</code> 并未执行完成，为什么捕获不到异常呢？</p>
-<p>事实上，<strong>Promise 的异常都是由 reject 和 Promise.prototype.catch 来捕获</strong>，不管是同步还是异步。</p>
-<p>核心原因是因为 <code>Promise</code> 在执行回调中都用 <code>try catch</code> 包裹起来了，其中所有的异常都被内部捕获到了，并未往上抛异常，所以异常都不会被外层的 <code>try catch</code> 捕捉。</p>
-<p>🌰 例子5：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      reject(<span class="string">'报错了'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">await</span> a()</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>, e)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">foo()</span><br><span class="line"><span class="comment">// output</span></span><br><span class="line">error 报错了</span><br></pre></td></tr></table></figure></p>
-<p>为什么 <em>例子5</em> 的异常能被 <code>catch</code> 捕获到呢，因为报错的时候，线程执行已经进入了 <code>try catch</code> 代码块，并且异常由 reject 抛出，自然可以捕获到。</p>
-<p> ###总结：</p>
-<blockquote>
-<p><strong>1. 在报错的时候，线程执行已经进入 <code>try catch</code> 代码块，并且处在 <code>try catch</code> 里，才能被捕捉到。</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>2. 不要用 <code>try catch</code> 包裹 <code>Promise</code>，我们只需要给 <code>Promise</code> 增加 Promise#catch 就 OK 了</strong></p>
-</blockquote>
+<h3 id="项目属性"><a href="#项目属性" class="headerlink" title="项目属性"></a>项目属性</h3><ul>
+<li><code>grid-column-start: 2</code> 指定项目的左边框所在的垂直网格线</li>
+<li><code>grid-column-end: 3</code> 指定项目的右边框所在的垂直网格线</li>
+<li><code>grid-row-start: 4</code> 指定项目的上边框所在的水平网格线</li>
+<li><code>grid-row-end: 5</code> 指定项目的下边框所在的水平网格线</li>
+<li><code>span关键字</code> 表示”跨越“，即左右边框（上下边框）之间跨越多少个网格，例：grid-column-start: span 2;</li>
+<li><code>grid-column 属性</code> 是grid-column-start和grid-column-end的合并简写形式，例：grid-column: 1 / 2;</li>
+<li><code>grid-row 属性</code> 是grid-row-start属性和grid-row-end的合并简写形式，例：grid-row: 1 / 3;</li>
+<li><code>grid-area 属性</code> 指定项目放在哪一个区域，例：grid-area: e;</li>
+<li><code>justify-self: start | end | center | stretch</code> 设置单元格内容的水平位置（左中右）</li>
+<li><code>align-self: start | end | center | stretch</code> 设置单元格内容的垂直位置（上中下）</li>
+<li><code>place-self: &lt;align-self&gt; &lt;justify-self&gt;</code> 是align-self属性和justify-self属性的合并简写形式</li>
+</ul>
 
       
     </div>
@@ -393,7 +417,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js/" rel="tag"><i class="fa fa-tag"></i> js</a>
+            <a href="/tags/css/" rel="tag"><i class="fa fa-tag"></i> css</a>
           
         </div>
       
@@ -406,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/28/eventLoop/" rel="next" title="EventLoop 的简单理解">
-                <i class="fa fa-chevron-left"></i> EventLoop 的简单理解
+              <a href="/2020/09/09/sTable/" rel="next" title="后台管理系统element-admin——二次封装Table组件">
+                <i class="fa fa-chevron-left"></i> 后台管理系统element-admin——二次封装Table组件
               </a>
             
           </div>
@@ -415,10 +439,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/08/25/koa/" rel="prev" title="vue+koa+mysql实现一个简单的todolist">
-                vue+koa+mysql实现一个简单的todolist <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -581,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#下面三个小栗子，解释一下-try-catch-的前中后"><span class="nav-number">1.</span> <span class="nav-text">下面三个小栗子，解释一下 try catch 的前中后</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#promise-amp-try-catch"><span class="nav-number"></span> <span class="nav-text">promise &amp; try catch</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#容器和项目"><span class="nav-number">1.1.</span> <span class="nav-text">容器和项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#行和列"><span class="nav-number">1.2.</span> <span class="nav-text">行和列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单元格"><span class="nav-number">1.3.</span> <span class="nav-text">单元格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网格线"><span class="nav-number">1.4.</span> <span class="nav-text">网格线</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器属性"><span class="nav-number">2.</span> <span class="nav-text">容器属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目属性"><span class="nav-number">3.</span> <span class="nav-text">项目属性</span></a></li></ol></div>
             
 
           </div>
