@@ -132,3 +132,9 @@ addEnable: checkPermission('system:role:add')
 <!-- v-if判断 -->
 <el-button v-if="addEnable">添加角色</el-button>
 ```
+
+### 最后
+> [完整代码地址](https://github.com/Yu-Lxy/element-admin)
+附图：
+![](element-admin/login.png)
+![](element-admin/home.png)
