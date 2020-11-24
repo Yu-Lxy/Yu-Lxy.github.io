@@ -92,7 +92,9 @@
 <meta property="og:image" content="http://yoursite.com/2020/09/08/element-admin/permission.png">
 <meta property="og:image" content="http://yoursite.com/2020/09/08/element-admin/permission1.png">
 <meta property="og:image" content="http://yoursite.com/2020/09/08/element-admin/permission2.png">
-<meta property="og:updated_time" content="2020-09-09T06:27:37.420Z">
+<meta property="og:image" content="http://yoursite.com/2020/09/08/element-admin/login.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/08/element-admin/home.png">
+<meta property="og:updated_time" content="2020-11-09T03:17:46.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="后台管理系统element-admin——登录权限篇">
 <meta name="twitter:description" content="Start记录写后台管理系统时的一些想法和组件的二次封装，项目初期参考的是花裤衩大神的vue-element-admin，后期根据业务进行了一些修改。  项目Github地址">
@@ -404,6 +406,9 @@
 <p>判断按钮是否展示是写了一个公用方法 <code>checkPermission</code> ，没有用指令是因为无法适用于所有组件。</p>
 <p>将提前设置好的 <code>唯一键</code> 传入方法，就可以从vuex里 <code>store.getters.buttons</code> 拿到所有按钮权限，对比后返回 <code>true 或 false</code>，来控制按钮的展示。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 引入方法 --&gt;</span><br><span class="line"><span class="keyword">import</span> &#123; checkPermission &#125; <span class="keyword">from</span> <span class="string">'@/utils/permissions'</span></span><br><span class="line"></span><br><span class="line">&lt;!-- data中定义变量 --&gt;</span><br><span class="line">addEnable: checkPermission(<span class="string">'system:role:add'</span>)</span><br><span class="line"></span><br><span class="line">&lt;!-- v-<span class="keyword">if</span>判断 --&gt;</span><br><span class="line">&lt;el-button v-<span class="keyword">if</span>=<span class="string">"addEnable"</span>&gt;添加角色&lt;<span class="regexp">/el-button&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><blockquote>
+<p><a href="https://github.com/Yu-Lxy/element-admin" target="_blank" rel="noopener">完整代码地址</a><br>附图：<br><img src="/2020/09/08/element-admin/login.png" alt><br><img src="/2020/09/08/element-admin/home.png" alt></p>
+</blockquote>
 
       
     </div>
@@ -609,7 +614,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Start"><span class="nav-number">1.</span> <span class="nav-text">Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录"><span class="nav-number">2.</span> <span class="nav-text">登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取用户信息"><span class="nav-number">2.1.</span> <span class="nav-text">获取用户信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限"><span class="nav-number">3.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端控制权限"><span class="nav-number">3.1.</span> <span class="nav-text">前端控制权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按钮级权限"><span class="nav-number">3.2.</span> <span class="nav-text">按钮级权限</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Start"><span class="nav-number">1.</span> <span class="nav-text">Start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录"><span class="nav-number">2.</span> <span class="nav-text">登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取用户信息"><span class="nav-number">2.1.</span> <span class="nav-text">获取用户信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限"><span class="nav-number">3.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端控制权限"><span class="nav-number">3.1.</span> <span class="nav-text">前端控制权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按钮级权限"><span class="nav-number">3.2.</span> <span class="nav-text">按钮级权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后"><span class="nav-number">3.3.</span> <span class="nav-text">最后</span></a></li></ol></li></ol></div>
             
 
           </div>
