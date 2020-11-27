@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LXYu.♡" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="作用域 作用域是指程序源代码中定义变量的区域，JavaScript 采用词法作用域（lexical scoping），也就是静态作用域。  静态作用域 &amp;amp; 动态作用域静态 ：因为 JavaScript 采用的是词法作用域，函数的作用域在函数定义的时候就决定了。动态 ：而与词法作用域相对的是动态作用域，函数的作用域是在函数调用时才决定的。">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS作用域深入理解">
+<meta property="og:url" content="http://yoursite.com/2020/03/24/scope/index.html">
+<meta property="og:site_name" content="LXYu.♡">
+<meta property="og:description" content="作用域 作用域是指程序源代码中定义变量的区域，JavaScript 采用词法作用域（lexical scoping），也就是静态作用域。  静态作用域 &amp;amp; 动态作用域静态 ：因为 JavaScript 采用的是词法作用域，函数的作用域在函数定义的时候就决定了。动态 ：而与词法作用域相对的是动态作用域，函数的作用域是在函数调用时才决定的。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-11-24T06:14:47.266Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS作用域深入理解">
+<meta name="twitter:description" content="作用域 作用域是指程序源代码中定义变量的区域，JavaScript 采用词法作用域（lexical scoping），也就是静态作用域。  静态作用域 &amp;amp; 动态作用域静态 ：因为 JavaScript 采用的是词法作用域，函数的作用域在函数定义的时候就决定了。动态 ：而与词法作用域相对的是动态作用域，函数的作用域是在函数调用时才决定的。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/24/scope/">
+
+
+
+
+
+  <title>JS作用域深入理解 | LXYu.♡</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LXYu.♡</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">˙ ᵕ ˙ 這是我的地方</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <a href="https://github.com/Yu-Lxy" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#527f9c; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/24/scope/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="鲤小鱼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/31298201?s=400&u=bf760848190371b7140df49fd93789b8d1072652&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LXYu.♡">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS作用域深入理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-24T14:01:45+08:00">
+                2020-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><blockquote>
+<p>作用域是指程序源代码中定义变量的区域，JavaScript 采用词法作用域（lexical scoping），也就是<strong>静态作用域</strong>。</p>
+</blockquote>
+<h3 id="静态作用域-amp-动态作用域"><a href="#静态作用域-amp-动态作用域" class="headerlink" title="静态作用域 &amp; 动态作用域"></a>静态作用域 &amp; 动态作用域</h3><p><strong>静态</strong> ：因为 JavaScript 采用的是词法作用域，函数的作用域在函数定义的时候就决定了。<br><strong>动态</strong> ：而与词法作用域相对的是动态作用域，函数的作用域是在函数调用时才决定的。</p>
+<a id="more"></a>
+<p> 看个例子🌰：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> value = <span class="number">2</span></span><br><span class="line">  foo()</span><br><span class="line">&#125;</span><br><span class="line">bar()  <span class="comment">// 输出神马呢？</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设：JavaScript采用的是静态作用域。</span></span><br><span class="line"><span class="comment">// 那么函数的作用域在函数定义时就决定了。</span></span><br><span class="line"><span class="comment">// 执行到foo函数，先从foo函数内部查找局部变量value。</span></span><br><span class="line"><span class="comment">// 如果没有就根据书写位置，查找上面一层代码，也就是value = 1。</span></span><br><span class="line"><span class="comment">// 所以结果是1。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设：JavaScript采用的是动态作用域。</span></span><br><span class="line"><span class="comment">// 那么函数的作用域在函数调用时决定。</span></span><br><span class="line"><span class="comment">// 执行到foo函数，先从foo函数内部查找局部变量value。</span></span><br><span class="line"><span class="comment">// 如果没有就从调用函数的作用域，也就是bar函数内部查找value变量，也就是value = 2。</span></span><br><span class="line"><span class="comment">// 所以结果是2。</span></span><br></pre></td></tr></table></figure></p>
+<p>前面说了：JavaScript采用的是静态作用域，所以这个例子的结果是 1。</p>
+<p>如果问到 JavaScript 的执行顺序，那么直观的印象就是顺序执行。然而 JavaScript 引擎并非一行一行的分析和执行，而是一段一段的分析执行。执行一段代码的时候，会进行一个“准备工作”，比如变量提升、函数提升。</p>
+<p>那这个“一段”是怎么划分的？怎样“准备工作”呢？</p>
+<blockquote>
+<p>当执行到一个函数的时候，就会进行“准备工作”，用个更专业的说法就是“执行上下文（execution context）”。</p>
+</blockquote>
+<h2 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h2><p>那可是函数有很多，怎么管理这么多的执行上下文呢？</p>
+<p>JavaScript 引擎创建了 <strong>执行上下文栈</strong>（Execution context stack, ECS）来管理执行上下文。</p>
+<p>模拟执行上下文栈的行为，我们定义执行上下文栈是一个数组：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ECStack = []</span><br></pre></td></tr></table></figure></p>
+<p>当 JavaScript 开始要解释执行代码的时候，最先遇到的是全局代码，所以初始化的时候首先会向执行上下文栈压入一个全局执行上下文，用 <code>globalContext</code> 表示，并且只有当整个应用程序结束的时候，ECStask才会被清空，所以ECStask最底部永远有个 globalContext:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ECStask = [</span><br><span class="line">  globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>🌰例如这段代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn3</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'fn3'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn2</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  fn3()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  fn2()</span><br><span class="line">&#125;</span><br><span class="line">fn1()</span><br></pre></td></tr></table></figure></p>
+<p>当执行一个函数的时候，就会创建一个执行上下文，并且压入执行上下文栈，当函数执行完毕的时候，就会将函数的执行上下文从栈中弹出。所以：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// fn1()</span></span><br><span class="line">ECStask.push(<span class="xml"><span class="tag">&lt;<span class="name">fn1</span>&gt;</span> functionContext)</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">// fn1调用了fn2，创建fn2的执行上下文</span></span><br><span class="line">ECStask.push(&lt;fn2&gt; functionContext)</span><br><span class="line"></span><br><span class="line">// fn2调用了fn3，再创建fn3的执行上下文</span><br><span class="line">ECStask.push(&lt;fn3&gt; functionContext)</span><br><span class="line"></span><br><span class="line">// fn3执行完毕</span><br><span class="line">ECStack.pop();</span><br><span class="line"></span><br><span class="line">// fn2执行完毕</span><br><span class="line">ECStack.pop();</span><br><span class="line"></span><br><span class="line">// fn1执行完毕</span><br><span class="line">ECStack.pop();</span><br></pre></td></tr></table></figure></p>
+<p>再看两个相似的例子🌰：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">'blobal scope'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> scope = <span class="string">'local scope'</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> scope</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> f()</span><br><span class="line">&#125;</span><br><span class="line">checkscope()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟执行上下文代码：</span></span><br><span class="line"><span class="comment">// ECStask.push(&lt;checkscope&gt; functionContext)</span></span><br><span class="line"><span class="comment">// ECStask.push(&lt;f&gt; functionContext)</span></span><br><span class="line"><span class="comment">// ECStack.pop()</span></span><br><span class="line"><span class="comment">// ECStack.pop()</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">'blobal scope'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> scope = <span class="string">'local scope'</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> scope</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> f</span><br><span class="line">&#125;</span><br><span class="line">checkscope()()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟执行上下文代码：</span></span><br><span class="line"><span class="comment">// ECStask.push(&lt;checkscope&gt; functionContext)</span></span><br><span class="line"><span class="comment">// ECStack.pop()</span></span><br><span class="line"><span class="comment">// ECStask.push(&lt;f&gt; functionContext)</span></span><br><span class="line"><span class="comment">// ECStack.pop()</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>对于每个执行上下文都有三个重要属性：</p>
+<ul>
+<li>变量对象（Variable object，VO）</li>
+<li>作用域链（Scope chain）</li>
+<li>this</li>
+</ul>
+</blockquote>
+<h2 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h2><p>变量对象是与 执行上下文 相关的数据作用域，存储了在上下文中定义的变量和函数声明。</p>
+<p>因为不同执行上下文的变量对象不同，所以来了解 <code>全局上下文的变量对象</code> 和 <code>函数上下文的变量对象</code>。</p>
+<h3 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h3><blockquote>
+<p>全局上下文中的变量对象就是 <strong>全局对象</strong></p>
+</blockquote>
+<p>执行全局代码时，创建全局执行上下文，全局上下文被压入执行上下文栈，然后初始化：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 压入执行上下文栈</span></span><br><span class="line">ECStack = [</span><br><span class="line">  globalContext</span><br><span class="line">]</span><br><span class="line"><span class="comment">// 全局上下文初始化</span></span><br><span class="line">globalContext = &#123;</span><br><span class="line">  VO: [global],</span><br><span class="line">  Scope: [globalContext.VO],</span><br><span class="line">  <span class="keyword">this</span>: globalContext.VO</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h3><p>在函数上下文中，我们用活动对象（activation object, AO）来表示变量对象。</p>
+<p>活动对象是在进入函数上下文时刻被创建的，它通过函数的 <code>arguments</code> 属性初始化。<code>arguments</code> 属性值是 <code>Arguments</code> 对象。</p>
+<h3 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h3><p>执行上下文的代码会分成两个阶段进行处理：</p>
+<blockquote>
+<ol>
+<li>进入执行上下文</li>
+<li>代码执行</li>
+</ol>
+</blockquote>
+<h4 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h4><p>当进入执行上下文时，这时候还没有执行代码，变量对象会包括：</p>
+<ol>
+<li><strong>函数的所有形参</strong>（如果是函数上下文） <ul>
+<li>由名称和对应组成的一个变量对象的属性被创建</li>
+<li>没有实参，属性值设为 undefined</li>
+</ul>
+</li>
+<li><strong>函数声明</strong><ul>
+<li>由名称和对应值（函数对象function-object）组成一个变量对象的属性被创建</li>
+<li>如果变量对象已经存在相同名称的属性，则完全替换这个属性</li>
+</ul>
+</li>
+<li><strong>变量声明</strong><ul>
+<li>由名称和对应值（undefined）组成一个变量对象的属性被创建</li>
+<li>如果变量名称跟已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的这类属性</li>
+</ul>
+</li>
+</ol>
+<p>例子🌰来了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">a</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> b = <span class="number">2</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">c</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  b = <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<p>在进入执行上下文后，这时候的AO是：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AO = &#123;</span><br><span class="line">  <span class="built_in">arguments</span>: &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">    length: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="literal">undefined</span>,</span><br><span class="line">  c: reference to <span class="function"><span class="keyword">function</span> <span class="title">c</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  d: undefind</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在代码执行阶段，会顺序执行代码，根据代码修改变量对象的值，所以执行代码后的AO是：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AO = &#123;</span><br><span class="line">  <span class="built_in">arguments</span>: &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">    length: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="number">3</span>,</span><br><span class="line">  c: reference to <span class="function"><span class="keyword">function</span> <span class="title">c</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  d: reference to FunctionExpression <span class="string">"d"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以<strong>变量对象</strong>总结几句是：</p>
+<ol>
+<li>全局上下文的变量对象初始化是全局对象</li>
+<li>函数上下文的变量对象初始化只包括 Arguments 对象</li>
+<li>在进入执行上下文时会给变量对象添加形参、函数声明、变量声明等初始化属性值</li>
+<li>在代码执行阶段，会再次修改变量对象的属性值</li>
+</ol>
+<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p>当在查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链就叫做作用域链。</p>
+<p>下面我们以一个函数的创建和激活两个时期来讲解作用域链是如何创建和变化的。</p>
+<h3 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h3><p>上文讲到 JavaScript 是静态作用域，函数的作用域在函数定义的时候就决定了。</p>
+<p>这是因为函数有一个内部属性<code>[[scope]]</code>，当函数创建的时候，就会保存所有父变量对象到里面，可以理解为<code>[[scope]]</code>就是所有父变量对象的层级链（并不代表完整的作用域链）。</p>
+<p>例子🌰：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 函数创建时，各自的[[scope]]为：</span></span><br><span class="line"><span class="comment">// foo.[[scope]] = [</span></span><br><span class="line"><span class="comment">//   globalContext.VO</span></span><br><span class="line"><span class="comment">// ]</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// bar.[[scope]] = [</span></span><br><span class="line"><span class="comment">//   fooContext.AO,</span></span><br><span class="line"><span class="comment">//   blobalContext.VO</span></span><br><span class="line"><span class="comment">// ]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="函数激活"><a href="#函数激活" class="headerlink" title="函数激活"></a>函数激活</h3><p>当函数激活时进入函数上下文，创建VO/AO后，就会将活动对象添加到作用域链的前端。</p>
+<p>这时候执行上下文的作用域链，我们命名为 Scope:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Scope = [AO].concat([[Scope]])</span><br></pre></td></tr></table></figure></p>
+<p>作用域链创建完毕~</p>
+<h2 id="缕缕顺"><a href="#缕缕顺" class="headerlink" title="缕缕顺"></a>缕缕顺</h2><p>因为如果直接说完函数的作用域就讲作用域链的话，里面的执行上下文就会懵。所以先说的函数执行里面的执行上下文才说的作用域链。有点乱没关系，现在来缕缕顺，当 js 解释器开始工作的时候：</p>
+<ul>
+<li>创建全局执行上下文，压入执行上下文栈，并初始化</li>
+<li>函数被创建的时候，就有内部属性作用域链 [[scope]]</li>
+<li>函数被调用时：<ul>
+<li>创建函数执行上下文，压入执行上下文栈中</li>
+<li>函数执行上下文栈初始化：<ul>
+<li>复制函数 [[scope]] 属性创建作用域链</li>
+<li>用 arguments 创建活动对象</li>
+<li>初始化活动对象，即加入形参、函数声明、变量声明</li>
+<li>将活动对象 (AO) 压入作用域链顶端</li>
+</ul>
+</li>
+<li>函数代码执行</li>
+</ul>
+</li>
+<li>函数执行结束的时候，位于栈顶的执行上下文被弹出，继续执行新的位于栈顶的执行上下文</li>
+</ul>
+<blockquote>
+<p>这种方式保证了只有位于栈顶的执行上下文才会被执行，也就是实现了单线程。</p>
+</blockquote>
+<h2 id="一个大例子🌰"><a href="#一个大例子🌰" class="headerlink" title="一个大例子🌰"></a>一个大例子🌰</h2><p>以下面为例，结合变量对象和执行上下文栈，我们总结一下函数执行上下文中作用域链和变量对象的创建过程：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scope = <span class="string">'blobal scope'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkscope</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> scope = <span class="string">'local scope'</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> scope</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> f()</span><br><span class="line">&#125;</span><br><span class="line">checkscope()</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><p><strong>执行全局代码</strong>，创建全局执行上下文，全局执行上下文被压入执行上下文栈</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ECStask = [</span><br><span class="line">  blobalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>全局上下文初始化</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">blobalContext = &#123;</span><br><span class="line">  VO: [vlobal],</span><br><span class="line">  Scope: [globalContext.VO],</span><br><span class="line">  <span class="keyword">this</span>: globalContext.VO</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化的同时，<strong>checkscope 函数被创建</strong>，保存作用域链到内部属性[[scope]]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">checkscope.[[scope]] = [</span><br><span class="line">  blobalContext.VO</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>执行 checkscope 函数</strong>，创建 checkscope 函数执行上下文，压入执行上下文栈</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ECStask = [</span><br><span class="line">  checkscopeContext,</span><br><span class="line">  globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>checkscope 函数执行上下文初始化</strong>：</p>
+<ul>
+<li>复制函数 [[scope]] 属性创建作用域链</li>
+<li>用 arguments 创建活动对象</li>
+<li>初始化活动对象 (AO)，即加入形参、函数声明、变量声明</li>
+<li>将活动对象压入 checkscope 作用域链顶端</li>
+<li>同时 f 函数被创建，保存作用域链到 f 函数的内部属性 [[scope]]<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">checkscopeContext = &#123;</span><br><span class="line">  AO: &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;</span><br><span class="line">      length: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    scope: <span class="literal">undefined</span>,</span><br><span class="line">    f: reference to <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  Scope: [AO, blobalContext.VO],</span><br><span class="line">  <span class="keyword">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fscope.[[scope]] = [</span><br><span class="line">  checkscopeContext.AO,</span><br><span class="line">  blobalContext.VO</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>执行 f 函数</strong>，创建 f 函数执行上下文，f 函数执行上下文被压入执行上下文栈</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ECStask = [</span><br><span class="line">  fContext,</span><br><span class="line">  checkscopeContext,</span><br><span class="line">  globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>f 函数执行上下文初始化</strong>，和第5步相似：</p>
+<ul>
+<li>复制函数[[scope]]属性创建作用域链</li>
+<li>用 arguments 创建活动对象</li>
+<li>初始化活动对象（AO），即加入形参、函数声明、变量声明</li>
+<li>将活动对象压入 f 作用域链顶端<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fContext = &#123;</span><br><span class="line">  AO: &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;</span><br><span class="line">      length: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  Scope: [AO, checkscopeContext.AO, blobalContext.VO],</span><br><span class="line">  <span class="keyword">this</span>: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>f 函数执行</strong>，沿着作用域链查找 scope 值，返回 scope 值</p>
+</li>
+<li><p><strong>f 函数执行完毕</strong>，f 函数上下文从执行上下文栈中弹出</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">  checkscopeContext,</span><br><span class="line">  globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>checkscope 函数执行完毕</strong>，checkscope 执行上下文从执行上下文栈中弹出</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">  globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"><i class="fa fa-tag"></i> js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/03/xiumi/" rel="next" title="vue+vue-ueditor-wrap+秀米">
+                <i class="fa fa-chevron-left"></i> vue+vue-ueditor-wrap+秀米
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/28/eventLoop/" rel="prev" title="EventLoop 的简单理解">
+                EventLoop 的简单理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars2.githubusercontent.com/u/31298201?s=400&u=bf760848190371b7140df49fd93789b8d1072652&v=4" alt="鲤小鱼">
+            
+              <p class="site-author-name" itemprop="name">鲤小鱼</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Yu-Lxy" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/29c1fd87fce0" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/lixiaoyu_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-cube"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态作用域-amp-动态作用域"><span class="nav-number">1.1.</span> <span class="nav-text">静态作用域 &amp; 动态作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行上下文栈"><span class="nav-number">2.</span> <span class="nav-text">执行上下文栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量对象"><span class="nav-number">3.</span> <span class="nav-text">变量对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局上下文"><span class="nav-number">3.1.</span> <span class="nav-text">全局上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数上下文"><span class="nav-number">3.2.</span> <span class="nav-text">函数上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行过程"><span class="nav-number">3.3.</span> <span class="nav-text">执行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进入执行上下文"><span class="nav-number">3.3.1.</span> <span class="nav-text">进入执行上下文</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域链"><span class="nav-number">4.</span> <span class="nav-text">作用域链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数创建"><span class="nav-number">4.1.</span> <span class="nav-text">函数创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数激活"><span class="nav-number">4.2.</span> <span class="nav-text">函数激活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缕缕顺"><span class="nav-number">5.</span> <span class="nav-text">缕缕顺</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个大例子🌰"><span class="nav-number">6.</span> <span class="nav-text">一个大例子🌰</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lxy</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-user"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</html>
